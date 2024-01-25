@@ -112,26 +112,31 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Face Towards Orb',
           de: 'Den Orb anschauen',
           fr: 'Pointez l\'orbe',
+          cn: '面向球',
         },
         orbDirBack: {
           en: 'Face Away from Orb',
           de: 'Weg vom Orb schauen',
           fr: 'Ne pointez pas l\'orbe',
+          cn: '背对球',
         },
         orbDirLeft: {
           en: 'Point Left at Orb',
           de: 'Zeige links auf den Orb',
           fr: 'Pointez à gauche de l\'orbe',
+          cn: '看向球左侧',
         },
         orbDirRight: {
           en: 'Point Right at Orb',
           de: 'Zeige Rechts auf den Orb',
           fr: 'Pointez à droite de l\'orbe',
+          cn: '看向球右侧',
         },
         orbGeneral: {
           en: 'Point opening at Orb',
           de: 'Zeige die Öffnung auf den Orb',
           fr: 'Pointez l\'orbe',
+          cn: '看向球开口侧', // FIXME
         },
       },
     },
@@ -149,11 +154,13 @@ const triggerSet: TriggerSet<Data> = {
             en: '3x Tankbuster on YOU',
             de: '3x Tankbuster auf DIR',
             fr: 'Tankbuster x3 sur VOUS',
+            cn: '3x 坦克死刑点名',
           },
           tankBusterOnPlayer: {
             en: '3x Tankbuster on ${player}',
             de: '3x Tankbuster auf ${player}',
             fr: 'Tankbuster x3 sur ${player}',
+            cn: '3x 坦克死刑点 ${player}',
           },
         };
 
@@ -300,11 +307,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Fetters (w/${player})',
           de: 'Fesseln (mit ${player})',
           fr: 'Entraves (avec ${player})',
+          cn: '止步 (和 ${player})', // FIXME: correct buff name
         },
         bubble: {
           en: 'Bubble (w/${player})',
           de: 'Blase (mit ${player})',
           fr: 'Bulles (avec ${player})',
+          cn: '泡泡 (和 ${player})', // FIXME: correct buff name
         },
       },
     },
@@ -336,6 +345,9 @@ const triggerSet: TriggerSet<Data> = {
              Par souci de concision, "à côté de" signifie toujours horizontal
              à l'est ou à l'ouest de quelque chose.
              Voir le déclencheur source pour les diagrammes dans les commentaires.`,
+        cn: `这些方向假设你一直选的是同一个面向的正方形上的那个水晶。
+             简洁起见，"next to"指的是垂直方向 右(东)/左(西) 之类的。
+             请参阅触发器源代码注释中的图表。`, // FIXME
       },
       type: 'StartsUsing',
       netRegex: { id: ['8AB8', '8AB4'], source: 'Ketuduke' },
@@ -453,27 +465,32 @@ const triggerSet: TriggerSet<Data> = {
           en: '${fettersBubble} + ${spreadStack}',
           de: '${fettersBubble} + ${spreadStack}',
           fr: '${fettersBubble} + ${spreadStack}',
+          cn: '${fettersBubble} + ${spreadStack}',
         },
         bubbleNetMechPartner: {
           en: '${fettersBubble} + ${spreadStack} (w/${player})',
           de: '${fettersBubble} + ${spreadStack} (mit ${player})',
           fr: '${fettersBubble} + ${spreadStack} (avec ${player})',
+          cn: '${fettersBubble} + ${spreadStack} (和 ${player})',
         },
         bubbleBuff: {
           en: 'Bubble',
           de: 'Blase',
           fr: 'Bulle',
+          cn: '泡泡', // FIXME
         },
         fettersBuff: {
           en: 'Fetters',
           de: 'Ketten',
           fr: 'Entraves',
+          cn: '止步', // FIXME
         },
         spread: Outputs.spread,
         stacks: {
           en: 'Stacks',
           de: 'Sammeln',
           fr: 'Package',
+          cn: '分摊',
         },
         bubbleAnything: {
           en: 'Diagonal of Vertical / Next to Horizontal ',
@@ -516,11 +533,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Spread => Stacks',
           de: 'Verteilen => Sammeln',
           fr: 'Écarté => Package',
+          cn: '分散 => 分摊',
         },
         stacks: {
           en: 'Stacks => Spread',
           de: 'Sammeln => Verteilen',
           fr: 'Package => Écarté',
+          cn: '分摊 => 分散',
         },
       },
     },
@@ -545,11 +564,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Stacks',
           de: 'Sammeln',
           fr: 'Package',
+          cn: '分摊',
         },
         roleStacks: {
           en: 'Role Stacks',
           de: 'Rollengruppe sammeln',
           fr: 'Package par rôle',
+          cn: '职能分摊',
         },
       },
     },
@@ -595,16 +616,19 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Role Stacks',
           de: 'Rollengruppe sammeln',
           fr: 'Package par rôle',
+          cn: '职能分摊',
         },
         spreadThenRoleStacks: {
           en: 'Spread => Role Stacks',
           de: 'Verteilen => Rollengruppe sammeln',
           fr: 'Écarté => Package par rôle',
+          cn: '分散 => 职能分摊',
         },
         roleStacksThenSpread: {
           en: 'Role Stacks => Spread',
           de: 'Rollengruppe sammeln => Verteilen',
           fr: 'Package par rôle => Écarté',
+          cn: '职能分摊 => 分散',
         },
       },
     },
@@ -623,11 +647,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Out => In + Stacks',
           de: 'Raus => Rein + sammeln',
           fr: 'Extérieur => Intérieur + Package',
+          cn: '远离 => 靠近 + 分摊',
         },
         outInRoleStacks: {
           en: 'Out => In + Role Stacks',
           de: 'Raus => Rein + Rollengruppe sammeln',
           fr: 'Extérieur => Intérieur + Package par rôle',
+          cn: '远离 => 靠近 + 职能分摊',
         },
       },
     },
@@ -646,11 +672,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'In => Out + Stacks',
           de: 'Rein => Raus + sammeln',
           fr: 'Intérieur => Extérieur + Package',
+          cn: '靠近 => 远离 + 分摊',
         },
         inOutRoleStacks: {
           en: 'In => Out + Role Stacks',
           de: 'Rein => Raus + Rollengruppe sammeln',
           fr: 'Intérieur => Extérieur + Package par rôle',
+          cn: '靠近 => 远离 + 职能分摊',
         },
       },
     },
@@ -676,6 +704,7 @@ const triggerSet: TriggerSet<Data> = {
           en: '${inOut} + ${stack}',
           de: '${inOut} + ${stack}',
           fr: '${inOut} + ${stack}',
+          cn: '${inOut} + ${stack}',
         },
         in: Outputs.in,
         out: Outputs.out,
@@ -683,11 +712,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Stacks',
           de: 'Sammeln',
           fr: 'Package',
+          cn: '分摊',
         },
         roleStacks: {
           en: 'Role Stacks',
           de: 'Rollengruppe sammeln',
           fr: 'Package par rôle',
+          cn: '职能分摊',
         },
       },
     },
@@ -729,16 +760,19 @@ const triggerSet: TriggerSet<Data> = {
           en: 'North/South',
           de: 'Norden/Süden',
           fr: 'Nord/Sud',
+          cn: '上(北)/下(南)',
         },
         eastWestSafe: {
           en: 'East/West',
           de: 'Osten/Westen',
           fr: 'Est/Ouest',
+          cn: '左(西)/右(东)',
         },
         cornersSafe: {
           en: 'Corners',
           de: 'Ecken',
           fr: 'Coins',
+          cn: '角落',
         },
       },
     },
@@ -758,16 +792,19 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Knockback => Spread',
           de: 'Rückstoß => verteilen',
           fr: 'Pousée => Écartez-vous',
+          cn: '击退 => 分散',
         },
         knockbackStacks: {
           en: 'Knockback => Stacks',
           de: 'Rückstoß => sammeln',
           fr: 'Poussée => Package',
+          cn: '击退 => 分摊',
         },
         knockbackRoleStacks: {
           en: 'Knockback => Role Stacks',
           de: 'Rückstoß => Rollengruppe sammeln',
           fr: 'Poussée => Package par rôle',
+          cn: '击退 => 职能分摊',
         },
       },
     },
