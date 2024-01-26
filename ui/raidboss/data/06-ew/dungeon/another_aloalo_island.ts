@@ -345,7 +345,7 @@ const triggerSet: TriggerSet<Data> = {
              Par souci de concision, "à côté de" signifie toujours horizontal
              à l'est ou à l'ouest de quelque chose.
              Voir le déclencheur source pour les diagrammes dans les commentaires.`,
-        cn: `这些方向假设你一直选的是同一个面向的正方形上的那个水晶。
+        cn: `这些方向假设你一直选的是同一面向的地板方格上的水晶。
              简洁起见，"相邻" 指的是 水平方向 右(东)/左(西) 之类的。
              请参阅触发器源代码注释中的图表。`, // FIXME
       },
@@ -496,30 +496,31 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Diagonal of Vertical / Next to Horizontal ',
           de: 'Diagonale der Vertikalen / Neben Horizontal',
           fr: 'Diagonale de la verticale / À côté de l\'horizontale',
-          cn: '垂直水晶对角线 / 相邻水平水晶',
+          cn: '竖水晶对角线 / 相邻横水晶',
         },
         fettersSpreadSplit: {
           en: 'Diagonal of Vertical',
           de: 'Diagonale der Vertikalen',
           fr: 'Diagonale de la verticale',
-          cn: '垂直水晶对角线',
+          cn: '竖水晶对角线',
         },
         fettersSpreadColumn: {
           en: 'Next to Vertical',
           de: 'Neben Vertikal',
           fr: 'À côté de la verticale',
-          cn: '相邻水平水晶',
+          cn: '相邻横水晶',
         },
         fettersStackSplit: {
           en: 'On Horizontal',
           de: 'Auf Horizontal',
           fr: 'Sur l\'horizontale',
+          cn: '横水晶上',
         },
         fettersStackColumn: {
           en: 'Diagonal of Horizontal',
           de: 'Diagonale der Horizontalen',
           fr: 'Diagonale de l\'horizontale',
-          cn: '水平水晶对角线',
+          cn: '横水晶对角线',
         },
       },
     },
@@ -776,7 +777,7 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Corners',
           de: 'Ecken',
           fr: 'Coins',
-          cn: '角落',
+          cn: '四角',
         },
       },
     },
@@ -831,11 +832,13 @@ const triggerSet: TriggerSet<Data> = {
             en: 'Away from ${player}',
             de: 'Weg von ${player}',
             fr: 'Loin de ${player}',
+            cn: '远离 ${player}',
           },
           tornadoOnYou: {
             en: 'Tornado on YOU',
             de: 'Tornado auf DIR',
             fr: 'Tornade sur VOUS',
+            cn: '龙卷风点名',
           },
         };
 
@@ -857,6 +860,7 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Cleanse ${player}',
           de: 'Reinige ${player}',
           fr: 'Guérissez ${player}',
+          cn: '康复 ${player}',
         },
       },
     },
@@ -882,6 +886,7 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Get Behind + Out',
           de: 'Geh nach Hinten + Raus',
           fr: 'Derrière + Extérieur',
+          cn: '去背后 + 远离',
         },
       },
     },
@@ -901,6 +906,7 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Kill Islekeeper!',
           de: 'Wächter besiegen!',
           fr: 'Tuez le gardien !',
+          cn: '击杀 Islekeeper', // FIXME
         },
       },
     },
@@ -1048,21 +1054,25 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Face Towards Lala',
           de: 'Lala anschauen',
           fr: 'Regardez Lala',
+          cn: '面向Lala',
         },
         back: {
           en: 'Look Away from Lala',
           de: 'Von Lala weg schauen',
           fr: 'Ne regardez pas Lala',
+          cn: '背对Lala',
         },
         left: {
           en: 'Left Flank towards Lala',
           de: 'Linke Seite zu Lala zeigen',
           fr: 'Flanc gauche vers Lala',
+          cn: 'Lala左侧',
         },
         right: {
           en: 'Right Flank towards Lala',
           de: 'Rechte Seite zu Lala zeigen',
           fr: 'Flanc droit vers Lala',
+          cn: 'Lala右侧',
         },
       },
     },
@@ -1092,16 +1102,19 @@ const triggerSet: TriggerSet<Data> = {
             en: 'One',
             de: 'Eins',
             fr: 'Un',
+            cn: '1',
           },
           bigTwo: {
             en: 'Two (stack with three)',
             de: 'Zwei (sammeln mit Drei)',
             fr: 'Deux (Pack avec Trois)',
+            cn: '2 (和3分摊)',
           },
           smallTwo: {
             en: 'Two (stack with one)',
             de: 'Zwei (sammeln mit Eins)',
             fr: 'Deux (Pack avec Un',
+            cn: '2 (和1分摊)',
           },
           eitherTwo: {
             en: 'Either Two (w/${player})',
@@ -1112,17 +1125,20 @@ const triggerSet: TriggerSet<Data> = {
             en: 'Three',
             de: 'Drei',
             fr: 'Trois',
+            cn: '3',
           },
           // This is just a raidcall so you can direct your friends.
           smallTwoOn: {
             en: '(Two with one: ${players})',
             de: '(Zwei mit Eins: ${players})',
             fr: '(Deux avec Un : ${players})',
+            cn: '(2和1: ${players})',
           },
           unknownNum: {
             en: '${num}',
             de: '${num}',
             fr: '${num}',
+            cn: '${num}',
           },
           num1: Outputs.num1,
           num2: Outputs.num2,
@@ -1224,11 +1240,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Leftward March',
           de: 'Linker March',
           fr: 'Marche à gauche',
+          cn: '强制移动: 左',
         },
         right: {
           en: 'Rightward March',
           de: 'Rechter March',
           fr: 'Marche à droite',
+          cn: '强制移动: 右',
         },
       },
     },
@@ -1250,21 +1268,25 @@ const triggerSet: TriggerSet<Data> = {
           en: 'One (avoid all)',
           de: 'Eins (alles ausweichen)',
           fr: 'Un (Évitez tout)',
+          cn: '1 (远离全部)',
         },
         num2: {
           en: 'Two (stay middle)',
           de: 'Zwei (steh in der Mitte)',
           fr: 'Deux (Restez au centre)',
+          cn: '2 (待在中间)',
         },
         num3: {
           en: 'Three (adjacent to middle)',
           de: 'Drei (steh neben der Mitte)',
           fr: 'Trois (adjacent au centre)',
+          cn: '3 (中间相邻)',
         },
         num4: {
           en: 'Four',
           de: 'Vier',
           fr: 'Quatre',
+          cn: '4',
         },
       },
     },
