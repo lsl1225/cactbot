@@ -346,7 +346,7 @@ const triggerSet: TriggerSet<Data> = {
              à l'est ou à l'ouest de quelque chose.
              Voir le déclencheur source pour les diagrammes dans les commentaires.`,
         cn: `这些方向假设你一直选的是同一面向的地板方格上的水晶。
-             简洁起见，"相邻" 指的是 水平方向 右(东)/左(西) 之类的。
+             简洁起见，"相邻" 指的是左右相邻的某个水晶。
              请参阅触发器源代码注释中的图表。`, // FIXME
       },
       type: 'StartsUsing',
@@ -496,7 +496,7 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Diagonal of Vertical / Next to Horizontal ',
           de: 'Diagonale der Vertikalen / Neben Horizontal',
           fr: 'Diagonale de la verticale / À côté de l\'horizontale',
-          cn: '竖水晶对角线 / 相邻横水晶',
+          cn: '竖水晶对角线 / 左右相邻的横水晶',
         },
         fettersSpreadSplit: {
           en: 'Diagonal of Vertical',
@@ -508,7 +508,7 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Next to Vertical',
           de: 'Neben Vertikal',
           fr: 'À côté de la verticale',
-          cn: '相邻横水晶',
+          cn: '左右相邻的竖水晶',
         },
         fettersStackSplit: {
           en: 'On Horizontal',
