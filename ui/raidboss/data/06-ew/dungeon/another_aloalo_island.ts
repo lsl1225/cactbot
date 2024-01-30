@@ -346,8 +346,8 @@ const triggerSet: TriggerSet<Data> = {
              à l'est ou à l'ouest de quelque chose.
              Voir le déclencheur source pour les diagrammes dans les commentaires.`,
         cn: `这些方向假设你一直选的是同一面向的地板方格上的水晶。
-             简洁起见，"相邻" 指的是左右相邻的某个水晶。
-             请参阅触发器源代码注释中的图表。`, // FIXME
+             简洁起见，"相邻" 指的是左右水平相邻的某一个。
+             请参阅触发器源代码注释中的图表。`,
       },
       type: 'StartsUsing',
       netRegex: { id: ['8AB8', '8AB4'], source: 'Ketuduke' },
@@ -477,13 +477,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Bubble',
           de: 'Blase',
           fr: 'Bulle',
-          cn: '泡泡', // FIXME
+          cn: '泡泡', // FIXME: correct buff name
         },
         fettersBuff: {
           en: 'Fetters',
           de: 'Ketten',
           fr: 'Entraves',
-          cn: '止步', // FIXME
+          cn: '止步', // FIXME: correct buff name
         },
         spread: Outputs.spread,
         stacks: {
@@ -906,7 +906,7 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Kill Islekeeper!',
           de: 'Wächter besiegen!',
           fr: 'Tuez le gardien !',
-          cn: '击杀 Islekeeper', // FIXME
+          cn: '击杀 Islekeeper', // FIXME: correct name
         },
       },
     },
@@ -1120,7 +1120,7 @@ const triggerSet: TriggerSet<Data> = {
             en: 'Either Two (w/${player})',
             de: 'Eine Zwei (mit ${player})',
             fr: 'Un des deux (avec ${player})',
-            cn: 'Either Two (w/${player})', // FIXME
+            cn: '2 (和 ${player} 任选1或3分摊)',
           },
           three: {
             en: 'Three',
