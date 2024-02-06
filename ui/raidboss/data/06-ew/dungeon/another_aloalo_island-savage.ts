@@ -1059,25 +1059,25 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Face Towards Lala',
           de: 'Lala anschauen',
           fr: 'Regardez Lala',
-          cn: '面向 Lala',
+          cn: '面向 Lala', // FIXME: correct boss name
         },
         back: {
           en: 'Look Away from Lala',
           de: 'Von Lala weg schauen',
           fr: 'Ne regardez pas Lala',
-          cn: '背对 Lala',
+          cn: '背对 Lala', // FIXME: correct boss name
         },
         left: {
           en: 'Left Flank towards Lala',
           de: 'Linke Seite zu Lala zeigen',
           fr: 'Flanc gauche vers Lala',
-          cn: '左侧朝向 Lala', // FIXME: fix boss name
+          cn: '左侧朝向 Lala', // FIXME: correct boss name
         },
         right: {
           en: 'Right Flank towards Lala',
           de: 'Rechte Seite zu Lala zeigen',
           fr: 'Flanc droit vers Lala',
-          cn: '右侧朝向 Lala', // FIXME: fix boss name
+          cn: '右侧朝向 Lala', // FIXME: correct boss name
         },
       },
     },
