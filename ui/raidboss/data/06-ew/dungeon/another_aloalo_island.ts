@@ -124,19 +124,19 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Point Left at Orb',
           de: 'Zeige links auf den Orb',
           fr: 'Pointez à gauche de l\'orbe',
-          cn: '看向球左侧',
+          cn: '左侧看向球',
         },
         orbDirRight: {
           en: 'Point Right at Orb',
           de: 'Zeige Rechts auf den Orb',
           fr: 'Pointez à droite de l\'orbe',
-          cn: '看向球右侧',
+          cn: '右侧看向球',
         },
         orbGeneral: {
           en: 'Point opening at Orb',
           de: 'Zeige die Öffnung auf den Orb',
           fr: 'Pointez l\'orbe',
-          cn: '看向球开口侧', // FIXME
+          cn: '开口侧看向球',
         },
       },
     },
@@ -307,13 +307,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Fetters (w/${player})',
           de: 'Fesseln (mit ${player})',
           fr: 'Entraves (avec ${player})',
-          cn: '止步 (和 ${player})', // FIXME: correct buff name
+          cn: '止步 (和 ${player})',
         },
         bubble: {
           en: 'Bubble (w/${player})',
           de: 'Blase (mit ${player})',
           fr: 'Bulles (avec ${player})',
-          cn: '泡泡 (和 ${player})', // FIXME: correct buff name
+          cn: '泡泡 (和 ${player})',
         },
       },
     },
@@ -345,8 +345,8 @@ const triggerSet: TriggerSet<Data> = {
              Par souci de concision, "à côté de" signifie toujours horizontal
              à l'est ou à l'ouest de quelque chose.
              Voir le déclencheur source pour les diagrammes dans les commentaires.`,
-        cn: `这些方向假设你一直选的是同一面向的地板方格上的水晶。
-             简洁起见，"相邻" 指的是左右水平相邻的某一个。
+        cn: `这些方向假设你一直选的是同一面向的四块地板方格上的水晶。
+             简洁起见，"相邻" 指的是左右水平相邻的某一个水晶。
              请参阅触发器源代码注释中的图表。`,
       },
       type: 'StartsUsing',
@@ -477,13 +477,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Bubble',
           de: 'Blase',
           fr: 'Bulle',
-          cn: '泡泡', // FIXME: correct buff name
+          cn: '泡泡',
         },
         fettersBuff: {
           en: 'Fetters',
           de: 'Ketten',
           fr: 'Entraves',
-          cn: '止步', // FIXME: correct buff name
+          cn: '止步',
         },
         spread: Outputs.spread,
         stacks: {
@@ -1066,13 +1066,13 @@ const triggerSet: TriggerSet<Data> = {
           en: 'Left Flank towards Lala',
           de: 'Linke Seite zu Lala zeigen',
           fr: 'Flanc gauche vers Lala',
-          cn: '左侧朝向 Lala (面向看右边)',
+          cn: '左侧朝向 Lala', // FIXME: fix boss name
         },
         right: {
           en: 'Right Flank towards Lala',
           de: 'Rechte Seite zu Lala zeigen',
           fr: 'Flanc droit vers Lala',
-          cn: '右侧朝向 Lala (面向看左边)',
+          cn: '右侧朝向 Lala', // FIXME: fix boss name
         },
       },
     },
@@ -1120,7 +1120,7 @@ const triggerSet: TriggerSet<Data> = {
             en: 'Either Two (w/${player})',
             de: 'Eine Zwei (mit ${player})',
             fr: 'Un des deux (avec ${player})',
-            cn: '2 (和 ${player} 任选1或3分摊)',
+            cn: '2 (和 ${player})',
           },
           three: {
             en: 'Three',
@@ -1459,7 +1459,7 @@ const triggerSet: TriggerSet<Data> = {
           en: '(${num} safe soon)',
           de: '(${num} gleich sicher)',
           fr: '(${num} bientôt sûr',
-          cn: '(稍后 ${num} 安全)',
+          cn: '(很快 ${num} 安全)',
         },
         num1: Outputs.num1,
         num2: Outputs.num2,
