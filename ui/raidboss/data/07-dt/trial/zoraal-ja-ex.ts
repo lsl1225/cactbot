@@ -88,10 +88,12 @@ const stayGoOutputStrings: OutputStrings = {
   stay: {
     en: 'Stay',
     de: 'Bleib Stehen',
+    cn: '停',
   },
   goAcross: {
     en: 'Go Across',
     de: 'Geh rüber',
+    cn: '穿',
   },
 };
 
@@ -166,11 +168,13 @@ const triggerSet: TriggerSet<Data> = {
         frontRight: {
           en: 'Front + Boss\'s Right',
           de: 'Vorne + Rechts vom Boss',
+          cn: '前 + Boss右侧',
         },
         ...stayGoOutputStrings,
         frontRightKnockaround: {
           en: 'Front + Boss\'s Right (${stayGo})',
           de: 'Vorne + Rechts vom Boss (${stayGo})',
+          cn: '前 + Boss右侧 (${stayGo})',
         },
       },
     },
@@ -190,11 +194,13 @@ const triggerSet: TriggerSet<Data> = {
         frontLeft: {
           en: 'Front + Boss\'s Left',
           de: 'Vorne + Links vom Boss',
+          cn: '前 + Boss左侧',
         },
         ...stayGoOutputStrings,
         frontLeftKnockaround: {
           en: 'Front + Boss\'s Left (${stayGo})',
           de: 'Vorne + Links vom Boss (${stayGo})',
+          cn: '前 + Boss左侧 (${stayGo})',
         },
       },
     },
@@ -214,11 +220,13 @@ const triggerSet: TriggerSet<Data> = {
         backRight: {
           en: 'Behind + Boss\'s Left',
           de: 'Hinten + Links vom Boss',
+          cn: '后 + Boss左侧',
         },
         ...stayGoOutputStrings,
         backRightKnockaround: {
           en: 'Behind + Boss\'s Left (${stayGo})',
           de: 'Hinten + Links vom Boss (${stayGo})',
+          cn: '后 + Boss左侧 (${stayGo})',
         },
       },
     },
@@ -238,11 +246,13 @@ const triggerSet: TriggerSet<Data> = {
         backLeft: {
           en: 'Behind + Boss\'s Right',
           de: 'Hinten + Rechts vom Boss',
+          cn: '后 + Boss右侧',
         },
         ...stayGoOutputStrings,
         backLeftKnockaround: {
           en: 'Behind + Boss\'s Right (${stayGo})',
           de: 'Hinten + Rechts vom Boss (${stayGo})',
+          cn: '后 + Boss右侧 (${stayGo})',
         },
       },
     },
@@ -322,6 +332,7 @@ const triggerSet: TriggerSet<Data> = {
           return output.intercardsEast!();
         return output.intercardsWest!();
       },
+      // FIXME
       outputStrings: {
         insideWest: {
           en: 'Inner West Diamond',
@@ -392,10 +403,12 @@ const triggerSet: TriggerSet<Data> = {
         enumOnYou: {
           en: 'Partner stack (on you)',
           de: 'Mit Partner sammeln (auf dir)',
+          cn: '和搭档分摊 (点名)',
         },
         enumKnockback: {
           en: 'Partner stack (knockback)',
           de: 'Mit Partner sammeln (Rückstoß)',
+          cn: '和搭档分摊 (击退)',
         },
       },
     },
@@ -515,14 +528,17 @@ const triggerSet: TriggerSet<Data> = {
         unknown: {
           en: 'Safe Quadrant + Spread Out',
           de: 'Sicherer Quadrant + Verteilen',
+          cn: '安全区域 + 分散',
         },
         left: {
           en: '<= Front Left Quadrant + Spread Out',
           de: '<= Vorderer linker Quadrant + Verteilen',
+          cn: '<= 前方左侧安全区 + 分散',
         },
         right: {
           en: 'Front Right Quadrant + Spread Out =>',
           de: 'Vorderer rechter Quadrant + Verteilen =>',
+          cn: '前方右侧安全区 + 分散 =>',
         },
       },
     },
@@ -571,6 +587,7 @@ const triggerSet: TriggerSet<Data> = {
         combo: {
           en: '${breakChains} (${stayGo})',
           de: '${breakChains} (${stayGo})',
+          cn: '${breakChains} (${stayGo})',
         },
       },
     },
@@ -600,16 +617,19 @@ const triggerSet: TriggerSet<Data> = {
         left: {
           en: 'Boss\'s Left',
           de: 'Links vom Boss',
+          cn: 'Boss左侧',
         },
         right: {
           en: 'Boss\'s Right',
           de: 'Rechts vom Boss',
+          cn: 'Boss右侧',
         },
         in: Outputs.in,
         out: Outputs.out,
         combo: {
           en: '${inOut} + ${side}',
           de: '${inOut} + ${side}',
+          cn: '${inOut} + ${side}',
         },
       },
     },
@@ -627,6 +647,7 @@ const triggerSet: TriggerSet<Data> = {
         rightSword: {
           en: 'Boss\'s Left',
           de: 'Links vom Boss',
+          cn: 'Boss左侧',
         },
       },
     },
@@ -640,6 +661,7 @@ const triggerSet: TriggerSet<Data> = {
         leftSword: {
           en: 'Boss\'s Right',
           de: 'Rechts vom Boss',
+          cn: 'Boss右侧',
         },
       },
     },
