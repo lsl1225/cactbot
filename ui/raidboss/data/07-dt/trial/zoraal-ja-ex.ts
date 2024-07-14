@@ -428,30 +428,37 @@ const triggerSet: TriggerSet<Data> = {
         insideWest: {
           en: 'Inner West Diamond',
           de: 'Innerer Westlicher Diamant',
+          cn: '内侧 左(西) 菱形',
         },
         insideEast: {
           en: 'Inner East Diamond',
           de: 'Innerer Östlicher Diamant',
+          cn: '内侧 右(东) 菱形',
         },
         insideNS: {
           en: 'Inner North/South Diamonds - ${lean}',
           de: 'Innerer Nördlicher/Südlicher Diamant - ${lean}',
+          cn: '内侧 上(北)/下(南) 菱形 - ${lean}',
         },
         leanWest: {
           en: 'Lean West',
           de: 'Westlich halten',
+          cn: '靠 左(西)',
         },
         leanEast: {
           en: 'Lean East',
           de: 'Östlich halten',
+          cn: '靠 右(东)',
         },
         intercardsEast: {
           en: 'Outer Intercard Diamonds - East',
           de: 'Äußere Interkardinale Diamanten - Osten',
+          cn: '外侧十字菱形 - 右(东)',
         },
         intercardsWest: {
           en: 'Outer Intercard Diamonds - West',
           de: 'Äußere Interkardinale Diamanten - Westen',
+          cn: '外侧十字菱形 - 左(西)',
         },
       },
     },
@@ -646,12 +653,15 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         leanLeft: {
           en: '<= Inside Left (Facing Boss)',
+          cn: '<= 内侧左 (面向Boss)',
         },
         leanRight: {
           en: 'Inside Right (Facing Boss) =>',
+          cn: '内侧右 (面向Boss) =>',
         },
         corner: {
           en: 'Corners Safe',
+          cn: '角落安全',
         },
         northwest: Outputs.northwest,
         northeast: Outputs.northeast,
@@ -659,16 +669,20 @@ const triggerSet: TriggerSet<Data> = {
         southwest: Outputs.southwest,
         fire: {
           en: 'Go Far',
+          cn: '远离',
         },
         wind: Outputs.knockback,
         fireWindSafe: {
           en: '${fireWind} ${safeDir}',
+          cn: '${fireWind} ${safeDir}',
         },
         combo: {
           en: '${fireWindCombo} + ${tile}',
+          cn: '${fireWindCombo} + ${tile}',
         },
         unknown: {
           en: 'Avoid Swords',
+          cn: '躲避剑',
         },
       },
     },
@@ -1001,15 +1015,19 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         inside: {
           en: 'Inside Safe',
+          cn: '内侧安全',
         },
         eastWest: {
           en: 'Inside East/West Safe',
+          cn: '内侧 左(西)/右(东) 安全',
         },
         northSouth: {
           en: 'Inside North/South Safe',
+          cn: '内侧 上(北)/下(南) 安全',
         },
         intercard: {
           en: 'Ouside Intercards Safe (Avoid Corners)',
+          cn: '外侧十字安全 (远离四角)',
         },
       },
     },
