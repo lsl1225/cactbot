@@ -229,6 +229,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Aim for uncracked tile',
           de: 'Ziehle auf nich gerissene Fläche',
+          cn: '瞄准没有裂开的地板',
         },
       },
     },

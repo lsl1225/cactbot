@@ -29,6 +29,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Get under Flytrap',
           de: 'Geh unter die Fliegenfalle',
+          cn: '站在Flytrap下面', // FIXME
         },
       },
     },
@@ -42,6 +43,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Stay out of inhale',
           de: 'Steh auserhalb des Soges',
+          cn: '站在inhale外', // FIXME
         },
       },
     },
@@ -71,6 +73,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Dodge Ivy cleaves (small)',
           de: 'Efeu-Cleave ausweichen (klein)',
+          cn: '躲避小怪顺劈 (小)', // FIXME
         },
       },
     },
@@ -85,6 +88,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Dodge Ivy cleaves (big)',
           de: 'Efeu-Cleave ausweichen (groß)',
+          cn: '躲避小怪顺劈 (大)', // FIXME
         },
       },
     },
@@ -124,6 +128,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Away on 3rd jump',
           de: 'Weg vom 3. Sprung',
+          cn: '躲开第三次跳',
         },
       },
     },
@@ -137,6 +142,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Away on 3rd jump',
           de: 'Weg vom 3. Sprung',
+          cn: '躲开第三次跳',
         },
       },
     },
@@ -157,6 +163,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'In, then follow jump',
           de: 'Rein, dann Sprüngen folgen',
+          cn: '靠近 => 跟随跳跃',
         },
       },
     },
