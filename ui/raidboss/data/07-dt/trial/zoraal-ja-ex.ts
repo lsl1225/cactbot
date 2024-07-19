@@ -167,11 +167,13 @@ const stayGoOutputStrings: OutputStrings = {
   stay: {
     en: 'Stay',
     de: 'Bleib Stehen',
+    fr: 'Restez',
     cn: '停',
   },
   goAcross: {
     en: 'Go Across',
     de: 'Geh rüber',
+    fr: 'Traversez',
     cn: '穿',
   },
 };
@@ -253,12 +255,14 @@ const triggerSet: TriggerSet<Data> = {
         frontRight: {
           en: 'Front + Boss\'s Right',
           de: 'Vorne + Rechts vom Boss',
+          fr: 'Devant + Droite du boss',
           cn: '前 + Boss右侧',
         },
         ...stayGoOutputStrings,
         frontRightKnockaround: {
           en: 'Front + Boss\'s Right (${stayGo})',
           de: 'Vorne + Rechts vom Boss (${stayGo})',
+          fr: 'Devant + Droite du boss (${stayGo})',
           cn: '前 + Boss右侧 (${stayGo})',
         },
       },
@@ -279,12 +283,14 @@ const triggerSet: TriggerSet<Data> = {
         frontLeft: {
           en: 'Front + Boss\'s Left',
           de: 'Vorne + Links vom Boss',
+          fr: 'Devant + Gauche du boss',
           cn: '前 + Boss左侧',
         },
         ...stayGoOutputStrings,
         frontLeftKnockaround: {
           en: 'Front + Boss\'s Left (${stayGo})',
           de: 'Vorne + Links vom Boss (${stayGo})',
+          fr: 'Devant + Gauche du boss(${stayGo})',
           cn: '前 + Boss左侧 (${stayGo})',
         },
       },
@@ -305,12 +311,14 @@ const triggerSet: TriggerSet<Data> = {
         backRight: {
           en: 'Behind + Boss\'s Left',
           de: 'Hinten + Links vom Boss',
+          fr: 'Derrière + Gauche du boss',
           cn: '后 + Boss左侧',
         },
         ...stayGoOutputStrings,
         backRightKnockaround: {
           en: 'Behind + Boss\'s Left (${stayGo})',
           de: 'Hinten + Links vom Boss (${stayGo})',
+          fr: 'Derrière + Gauche du boss (${stayGo})',
           cn: '后 + Boss左侧 (${stayGo})',
         },
       },
@@ -331,12 +339,14 @@ const triggerSet: TriggerSet<Data> = {
         backLeft: {
           en: 'Behind + Boss\'s Right',
           de: 'Hinten + Rechts vom Boss',
+          fr: 'Derrière + Droite du boss',
           cn: '后 + Boss右侧',
         },
         ...stayGoOutputStrings,
         backLeftKnockaround: {
           en: 'Behind + Boss\'s Right (${stayGo})',
           de: 'Hinten + Rechts vom Boss (${stayGo})',
+          fr: 'Derrière + Droite du boss (${stayGo})',
           cn: '后 + Boss右侧 (${stayGo})',
         },
       },
@@ -428,36 +438,43 @@ const triggerSet: TriggerSet<Data> = {
         insideWest: {
           en: 'Inner West Diamond',
           de: 'Innerer Westlicher Diamant',
+          fr: 'Diamant intérieur Ouest',
           cn: '内侧 左(西) 菱形',
         },
         insideEast: {
           en: 'Inner East Diamond',
           de: 'Innerer Östlicher Diamant',
+          fr: 'Diamant intérieur Est',
           cn: '内侧 右(东) 菱形',
         },
         insideNS: {
           en: 'Inner North/South Diamonds - ${lean}',
           de: 'Innerer Nördlicher/Südlicher Diamant - ${lean}',
+          fr: 'Diamant intérieur Nord/Sud - ${lean}',
           cn: '内侧 上(北)/下(南) 菱形 - ${lean}',
         },
         leanWest: {
           en: 'Lean West',
           de: 'Westlich halten',
+          fr: 'Vers l\'Ouest',
           cn: '靠 左(西)',
         },
         leanEast: {
           en: 'Lean East',
           de: 'Östlich halten',
+          fr: 'Vers l\'Est',
           cn: '靠 右(东)',
         },
         intercardsEast: {
           en: 'Outer Intercard Diamonds - East',
           de: 'Äußere Interkardinale Diamanten - Osten',
+          fr: 'Diamant extérieur intercardinal - Est',
           cn: '外侧十字菱形 - 右(东)',
         },
         intercardsWest: {
           en: 'Outer Intercard Diamonds - West',
           de: 'Äußere Interkardinale Diamanten - Westen',
+          fr: 'Diamant extérieur intercardinal - Ouest',
           cn: '外侧十字菱形 - 左(西)',
         },
       },
@@ -653,14 +670,20 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         leanLeft: {
           en: '<= Inside Left (Facing Boss)',
+          de: '<= Innen links (Boss anschauen)',
+          fr: '<= Gauche intérieur (en regardant le boss)',
           cn: '<= 内侧左 (面向Boss)',
         },
         leanRight: {
           en: 'Inside Right (Facing Boss) =>',
+          de: 'Innen Rechts (Boss anschauen) =>',
+          fr: 'Droite intérieur (en regardant le boss) =>',
           cn: '内侧右 (面向Boss) =>',
         },
         corner: {
           en: 'Corners Safe',
+          de: 'Ecken sicher',
+          fr: 'Coins sûrs',
           cn: '角落安全',
         },
         northwest: Outputs.northwest,
@@ -669,19 +692,26 @@ const triggerSet: TriggerSet<Data> = {
         southwest: Outputs.southwest,
         fire: {
           en: 'Go Far',
+          de: 'Weit gehen',
           cn: '远离',
         },
         wind: Outputs.knockback,
         fireWindSafe: {
           en: '${fireWind} ${safeDir}',
+          de: '${fireWind} ${safeDir}',
+          fr: '${fireWind} ${safeDir}',
           cn: '${fireWind} ${safeDir}',
         },
         combo: {
           en: '${fireWindCombo} + ${tile}',
+          de: '${fireWindCombo} + ${tile}',
+          fr: '${fireWindCombo} + ${tile}',
           cn: '${fireWindCombo} + ${tile}',
         },
         unknown: {
           en: 'Avoid Swords',
+          de: 'Vermeide Schwerter',
+          fr: 'Évitez les épées',
           cn: '躲避剑',
         },
       },
@@ -715,11 +745,13 @@ const triggerSet: TriggerSet<Data> = {
         enumOnYou: {
           en: 'Partner stack (on you)',
           de: 'Mit Partner sammeln (auf dir)',
+          fr: 'Package partenaire (sur vous)',
           cn: '和搭档分摊 (点名)',
         },
         enumKnockback: {
           en: 'Partner stack (knockback)',
           de: 'Mit Partner sammeln (Rückstoß)',
+          fr: 'Package partenaire (poussée)',
           cn: '和搭档分摊 (击退)',
         },
       },
@@ -842,16 +874,19 @@ const triggerSet: TriggerSet<Data> = {
         unknown: {
           en: 'Safe Quadrant + Spread Out',
           de: 'Sicherer Quadrant + Verteilen',
+          fr: 'Quadrant sûr + Dispersion',
           cn: '安全区域 + 分散',
         },
         left: {
           en: '<= Front Left Quadrant + Spread Out',
           de: '<= Vorderer linker Quadrant + Verteilen',
+          fr: '<= Quadrant avant gauche + Dispersion',
           cn: '<= 前方左侧安全区 + 分散',
         },
         right: {
           en: 'Front Right Quadrant + Spread Out =>',
           de: 'Vorderer rechter Quadrant + Verteilen =>',
+          fr: 'Quadrant avant droit + Dispersion =>',
           cn: '前方右侧安全区 + 分散 =>',
         },
       },
@@ -902,6 +937,7 @@ const triggerSet: TriggerSet<Data> = {
         combo: {
           en: '${breakChains} (${stayGo})',
           de: '${breakChains} (${stayGo})',
+          fr: '${breakChains} (${stayGo})',
           cn: '${breakChains} (${stayGo})',
         },
       },
@@ -932,11 +968,13 @@ const triggerSet: TriggerSet<Data> = {
         left: {
           en: 'Boss\'s Left',
           de: 'Links vom Boss',
+          fr: 'À gauche du boss',
           cn: 'Boss左侧',
         },
         right: {
           en: 'Boss\'s Right',
           de: 'Rechts vom Boss',
+          fr: 'À droite du boss',
           cn: 'Boss右侧',
         },
         in: Outputs.in,
@@ -944,6 +982,7 @@ const triggerSet: TriggerSet<Data> = {
         combo: {
           en: '${inOut} + ${side}',
           de: '${inOut} + ${side}',
+          fr: '${inOut} + ${side}',
           cn: '${inOut} + ${side}',
         },
       },
@@ -962,6 +1001,7 @@ const triggerSet: TriggerSet<Data> = {
         rightSword: {
           en: 'Boss\'s Left',
           de: 'Links vom Boss',
+          fr: 'À gauche du boss',
           cn: 'Boss左侧',
         },
       },
@@ -976,6 +1016,7 @@ const triggerSet: TriggerSet<Data> = {
         leftSword: {
           en: 'Boss\'s Right',
           de: 'Rechts vom Boss',
+          fr: 'À droite du boss',
           cn: 'Boss右侧',
         },
       },
@@ -1015,18 +1056,26 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         inside: {
           en: 'Inside Safe',
+          de: 'Innen sicher',
+          fr: 'Intérieur sûr',
           cn: '内侧安全',
         },
         eastWest: {
           en: 'Inside East/West Safe',
+          de: 'Innen Osten/Westen sicher',
+          fr: 'Intérieur Est/Ouest sûr',
           cn: '内侧 左(西)/右(东) 安全',
         },
         northSouth: {
           en: 'Inside North/South Safe',
+          de: 'Innen Norden/Süden sicher',
+          fr: 'Intérieur Nord/Sud sûr',
           cn: '内侧 上(北)/下(南) 安全',
         },
         intercard: {
-          en: 'Ouside Intercards Safe (Avoid Corners)',
+          en: 'Outside Intercards Safe (Avoid Corners)',
+          de: 'Außen Interkardinal sicher (Ecken vermeiden)',
+          fr: 'Intercardinal extérieur sûr (Évitez les coins)',
           cn: '外侧十字安全 (远离四角)',
         },
       },
@@ -1043,7 +1092,6 @@ const triggerSet: TriggerSet<Data> = {
     },
     {
       'locale': 'de',
-      'missingTranslations': true,
       'replaceSync': {
         'Fang': 'Reißzahn',
         'Zoraal Ja': 'Zoraal Ja',
@@ -1052,7 +1100,7 @@ const triggerSet: TriggerSet<Data> = {
         '\\(cast\\)': '(wirken)',
         '\\(damage\\)': '(Schaden)',
         '\\(enrage\\)': '(Finalangriff)',
-        '\\(lines drop\\)': '',
+        '\\(lines drop\\)': '(Linien kommen)',
         'Actualize': 'Verwirklichung',
         'Aero III': 'Windga',
         'Backward Edge': 'Hinterklinge',
@@ -1069,6 +1117,7 @@ const triggerSet: TriggerSet<Data> = {
         'Greater Gateway': 'Großes Tor der Welten',
         'Half Circuit': 'Halbe Runde',
         'Half Full': 'Halbes Ganzes',
+        'Might of Vollok': 'Macht von Vollok',
         'Multidirectional Divide': 'Wechselseitige Klingen',
         'Projection of Triumph': 'Vorhersage von Triumph',
         'Projection of Turmoil': 'Vorhersage von Aufruhr',
@@ -1104,6 +1153,7 @@ const triggerSet: TriggerSet<Data> = {
         'Greater Gateway': 'Passerelle enchantée',
         'Half Circuit': 'Demi-circuit',
         'Half Full': 'Demi-plénitude',
+        'Might of Vollok': 'Puissance de Vollok',
         'Multidirectional Divide': 'Division multidirectionnelle',
         'Projection of Triumph': 'Lames repoussantes',
         'Projection of Turmoil': 'Salve repoussante',
@@ -1139,6 +1189,7 @@ const triggerSet: TriggerSet<Data> = {
         'Greater Gateway': 'エンチャント・ゲートウェイ',
         'Half Circuit': 'ルーズハーフ・サーキット',
         'Half Full': 'ルーズハーフ',
+        'Might of Vollok': 'パワー・オブ・ヴォロク',
         'Multidirectional Divide': 'マルチウェイ',
         'Projection of Triumph': 'プロジェクション・エッジ',
         'Projection of Turmoil': 'プロジェクション・バースト',
