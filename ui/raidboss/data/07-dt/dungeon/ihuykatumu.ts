@@ -29,7 +29,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Get under Flytrap',
           de: 'Geh unter die Fliegenfalle',
-          cn: '站在Flytrap下面', // FIXME
+          cn: '去小怪下',
         },
       },
     },
@@ -43,7 +43,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Stay out of inhale',
           de: 'Steh auserhalb des Soges',
-          cn: '站在inhale外', // FIXME
+          cn: '站在扇形AoE外',
         },
       },
     },
@@ -73,7 +73,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Dodge Ivy cleaves (small)',
           de: 'Efeu-Cleave ausweichen (klein)',
-          cn: '躲避小怪顺劈 (小)', // FIXME
+          cn: '躲避小怪直线AoE (小)', // FIXME
         },
       },
     },
@@ -88,7 +88,7 @@ const triggerSet: TriggerSet<Data> = {
         text: {
           en: 'Dodge Ivy cleaves (big)',
           de: 'Efeu-Cleave ausweichen (groß)',
-          cn: '躲避小怪顺劈 (大)', // FIXME
+          cn: '躲避小怪直线AoE (大)', // FIXME
         },
       },
     },
