@@ -13,14 +13,16 @@ import ZoneId from '../../../../../resources/zone_id';
 import { RaidbossData } from '../../../../../types/data';
 import { TriggerSet } from '../../../../../types/trigger';
 
-/* TO DO LIST
-   - Electrope Edge 2 - call safe tile for non-Spark players?
+/*
+  TO DO LIST
+    - Electrope Edge 2 - call safe tile for non-Spark players?
+    - Raining Swords - possibly add `alertText` calls for each safe spot in sequence?
 */
+
 type Phase = 'door' | 'crosstail' | 'twilight' | 'midnight' | 'sunrise';
 
 type NearFar = 'near' | 'far'; // wherever you are...
 type InOut = 'in' | 'out';
-type PartnersSpread = 'partners' | 'spread';
 type NorthSouth = 'north' | 'south';
 type LeftRight = 'left' | 'right';
 
@@ -111,6 +113,18 @@ const isIntercardDir = (dir: DirectionOutput8): dir is DirectionIntercard => {
   return (Directions.outputIntercardDir as string[]).includes(dir);
 };
 
+const startingSwordList = [[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3]];
+
+const swordQuiverSafeMap = {
+  '95F9': 'sidesAndBack', // front cleave
+  '95FA': 'frontAndBack', // middle cleave
+  '95FB': 'frontAndSides', // back cleave
+} as const;
+
+const isSwordQuiverId = (id: string): id is keyof typeof swordQuiverSafeMap => {
+  return Object.keys(swordQuiverSafeMap).includes(id);
+};
+
 // For now, call the in/out, the party safe spot, and the bait spot; users can customize.
 // If/once standard strats develop, this would be a good thing to revisit.
 const witchHuntAlertOutputStrings = {
@@ -136,20 +150,12 @@ const tailThrustOutputStrings = {
     en: 'Double Knockback (Start on Right ==>)',
   },
   fireLeft: {
-    en: ' Start Front + Right ==>',
+    en: 'Fire - Start Front + Right ==>',
   },
   fireRight: {
-    en: '<== Start Front + Left',
+    en: '<== Fire - Start Front + Left',
   },
   unknown: Outputs.unknown,
-} as const;
-
-const startingSwordList = [[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3]];
-
-const swordQuiverSafeMap = {
-  '95F9': 'sidesAndBack', // front cleave
-  '95FA': 'frontAndBack', // middle cleave
-  '95FB': 'frontAndSides', // back cleave
 } as const;
 
 const swordQuiverOutputStrings = {
@@ -164,10 +170,6 @@ const swordQuiverOutputStrings = {
   },
 } as const;
 
-const isSwordQuiverId = (id: string): id is keyof typeof swordQuiverSafeMap => {
-  return Object.keys(swordQuiverSafeMap).includes(id);
-};
-
 export interface Data extends RaidbossData {
   phase: Phase;
   // Phase 1
@@ -179,12 +181,13 @@ export interface Data extends RaidbossData {
   witchGleamCount: number;
   electromines: { [id: string]: DirectionOutputIntercard };
   electrominesSafe: DirectionOutputIntercard[];
-  starEffect?: PartnersSpread;
+  starEffect?: 'partners' | 'spread';
   witchgleamSelfCount: number;
   condenserTimer?: 'short' | 'long';
   electronStreamSafe?: 'yellow' | 'blue';
   electronStreamSide?: NorthSouth;
   seenConductorDebuffs: boolean;
+  fulminousFieldCount: number;
   conductionPointTargets: string[];
   // Phase 2
   replicas: ReplicaData;
@@ -225,6 +228,7 @@ const triggerSet: TriggerSet<Data> = {
       electrominesSafe: [],
       witchgleamSelfCount: 0,
       seenConductorDebuffs: false,
+      fulminousFieldCount: 0,
       conductionPointTargets: [],
       // Phase 2
       replicas: {},
@@ -450,6 +454,8 @@ const triggerSet: TriggerSet<Data> = {
         unknown: Outputs.unknown,
       },
     },
+    // In lieu of a standardized strat, use separate triggers for each callout.
+    // This allows players to customize text if they will be baiting in fixed role order.
     {
       id: 'R4S Narrowing/Widening Witch Hunt First',
       type: 'StartsUsing',
@@ -640,7 +646,6 @@ const triggerSet: TriggerSet<Data> = {
         // will cause the stack count to increase. We could try to try to track that, but it makes
         // the final mechanic resolvable only under certain conditions (which still cause deaths),
         // so don't bother for now.  PRs welcome? :)
-
         return output[data.condenserTimer]!();
       },
       outputStrings: {
@@ -845,6 +850,36 @@ const triggerSet: TriggerSet<Data> = {
 
     // Fulminous Field
     {
+      id: 'R4S Fulminous Field',
+      type: 'Ability', // use the preceding ability (Electrope Translplant) for timing
+      netRegex: { id: '98D3', source: 'Wicked Thunder', capture: false },
+      infoText: (_data, _matches, output) => output.dodge!(),
+      outputStrings: {
+        dodge: {
+          en: 'Dodge w/Partner x7',
+        },
+      },
+    },
+    {
+      id: 'R4S Fulminous Field Spread',
+      type: 'Ability',
+      // 90FE = initial hit, 98CD = followup hits (x6)
+      netRegex: { id: ['90FE', '98CD'], source: 'Wicked Thunder' },
+      suppressSeconds: 1,
+      infoText: (data, matches, output) => {
+        if (matches.id === '90FE')
+          data.fulminousFieldCount = 1;
+        else
+          data.fulminousFieldCount++;
+
+        if (data.fulminousFieldCount === 3)
+          return output.spread!();
+      },
+      outputStrings: {
+        spread: Outputs.spread,
+      },
+    },
+    {
       id: 'R4S Conduction Point Collect',
       type: 'Ability',
       netRegex: { id: '98CE', source: 'Wicked Thunder' },
@@ -888,8 +923,8 @@ const triggerSet: TriggerSet<Data> = {
         const locDir = Directions.xyTo8DirOutput(x, y, 100, 165);
         (data.replicas[matches.id] ??= {}).location = locDir;
 
-        // Clones on cardinals facing cardinals could get a little messy - e.g., a NW facing clone
-        // could be calculated as facing N or W depending on pixel difference & rounding.
+        // Determining the facing for clonnes on cardinals using 4Dir could get a little messy -
+        // e.g., a NW-facing clone could result in a value of N or W depending on pixels/rounding.
         // To be safe, use the full 8-dir compass, and then adjust based on the clone's position
         // Note: We only care about heading for clones on cardinals during Sunrise Sabbath
         const hdgDir = Directions.outputFrom8DirNum(Directions.hdgTo8DirNum(hdg));
@@ -980,7 +1015,7 @@ const triggerSet: TriggerSet<Data> = {
       infoText: (data, matches, output) => {
         if (!isAetherialId(matches.id))
           throw new UnreachableCode();
-        // First time - no stored call (since it happens next), just save the effect
+        // First time - no stored call (since the mech happens next), just save the effect
         const firstTime = data.aetherialEffect === undefined;
         data.aetherialEffect = aetherialAbility[matches.id];
         if (!firstTime)
@@ -1067,7 +1102,7 @@ const triggerSet: TriggerSet<Data> = {
           return;
 
         // on the first combo, set the second safe spot to unknown, and return the first safe spot
-        // next time around, store the safe spot, so we can do a combined output with Wicked Special
+        // for second combo, just store the safe spot for a combined call with Wicked Special
         if (!data.secondTwilightCleaveSafe) {
           data.secondTwilightCleaveSafe = 'unknown';
           return output[safe0]!();
@@ -1109,15 +1144,13 @@ const triggerSet: TriggerSet<Data> = {
 
     // Midnight Sabbath
     {
-      // ActorControl category vfxUnknown49 (0x0031) determines which sets of clones execute first
-      // param1 = F4 executes first; param1 = F2 executes second
-      // We already have the actor positions and wings/guns from `R4S Model State Collect`, but
-      // since all lines arrive simultaneously, we need a short delay to let the collector run.
+      // ActorControl vfxUnknown49 (0x0031) determines which sets of clones execute first
+      // param1 = F4 (executes first) or F2 (executes second)
       id: 'R4S Midnight Sabbath First Adds',
       type: 'ActorControlExtra',
       netRegex: { id: '4.{7}', category: actorControlCategoryMap.vfxUnknown49, param1: 'F4' },
       condition: (data) => data.phase === 'midnight',
-      delaySeconds: 0.5,
+      delaySeconds: 0.5, // let the positio/effect collector finish
       suppressSeconds: 1, // we only need one
       run: (data, matches) => {
         const id = matches.id;
@@ -1161,7 +1194,7 @@ const triggerSet: TriggerSet<Data> = {
         if (data.midnightCardFirst === undefined || data.midnightFirstAdds === undefined)
           return firstMechStr;
 
-        // If the next add is doing wings, that add is safe; if guns, the opposite is safe.
+        // If the first add is doing wings, that add is safe; if guns, the opposite is safe.
         const dirStr = data.midnightFirstAdds === 'wings'
           ? (data.midnightCardFirst ? output.cardinals!() : output.intercards!())
           : (data.midnightCardFirst ? output.intercards!() : output.cardinals!());
@@ -1181,8 +1214,6 @@ const triggerSet: TriggerSet<Data> = {
     {
       id: 'R4S Concentrated/Scattered Burst 2',
       type: 'Ability', // use the ability line to trigger the second call for optimal timing
-      // 962B - Concentrated Burst (Partners => Spread)
-      // 962C - Scattered Burst (Spread => Partners)
       netRegex: { id: ['962B', '962C'], source: 'Wicked Thunder' },
       alertText: (data, matches, output) => {
         const secondMech = matches.id === '962B' ? 'spread' : 'partners';
@@ -1193,7 +1224,7 @@ const triggerSet: TriggerSet<Data> = {
 
         const secondAddsOnCards = !data.midnightCardFirst;
 
-        // If the next add is doing wings, that add is safe; if guns, the opposite is safe.
+        // If the 2nd add is doing wings, that add is safe; if guns, the opposite is safe.
         const dirStr = data.midnightSecondAdds === 'wings'
           ? (secondAddsOnCards ? output.cardinals!() : output.intercards!())
           : (secondAddsOnCards ? output.intercards!() : output.cardinals!());
@@ -1407,7 +1438,7 @@ const triggerSet: TriggerSet<Data> = {
       },
     },
     // After clones jump for 1st towers, their model state does not change, but an ActorMove packet
-    // is sent to change their location/heading.  There's really no need to continually track
+    // is sent to change their location/heading. There's really no need to continually track
     // actor/position heading and update data.replicas because we can set the data props we need
     // directly from a single ActorMove packet for the 2nd set of towers.
     {
