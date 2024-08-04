@@ -54,12 +54,11 @@ const phaseMap: { [id: string]: Phase } = {
   '95F2': 'crosstail', // Cross Tail Switch
   '9623': 'twilight', // Twilight Sabbath
   '9AB9': 'midnight', // Midnight Sabbath
-  '9ABA': 'sunrise', // Sunrise Sabbath
+  '9622': 'sunrise', // Ion Cluster (because debuffs pre-date the Sunrise Sabbath cast)
 };
 
 const actorControlCategoryMap = {
   'setModelState': '003F',
-  'playActionTimeline': '0197',
   'vfxUnknown49': '0031',
 } as const;
 
@@ -105,6 +104,14 @@ const replicaCleaveUnsafeMap: ReplicaCleaveMap = {
   },
 };
 
+const isCardinalDir = (dir: DirectionOutput8): dir is DirectionCardinal => {
+  return (Directions.outputCardinalDir as string[]).includes(dir);
+};
+
+const isIntercardDir = (dir: DirectionOutput8): dir is DirectionIntercard => {
+  return (Directions.outputIntercardDir as string[]).includes(dir);
+};
+
 // For now, call the in/out, the party safe spot, and the bait spot; users can customize.
 // If/once standard strats develop, this would be a good thing to revisit.
 const witchHuntAlertOutputStrings = {
@@ -138,13 +145,28 @@ const tailThrustOutputStrings = {
   unknown: Outputs.unknown,
 } as const;
 
-const isCardinalDir = (dir: DirectionOutput8): dir is DirectionCardinal => {
-  return (Directions.outputCardinalDir as string[]).includes(dir);
+const swordQuiverSafeMap = {
+  '95F9': 'sidesAndBack', // front cleave
+  '95FA': 'frontAndBack', // middle cleave
+  '95FB': 'frontAndSides', // back cleave
+} as const;
+
+const swordQuiverOutputStrings = {
+  frontAndSides: {
+    en: 'Go Front / Sides',
+  },
+  frontAndBack: {
+    en: 'Go Front / Back',
+  },
+  sidesAndBack: {
+    en: 'Go Sides / Back',
+  },
+} as const;
+
+const isSwordQuiverId = (id: string): id is keyof typeof swordQuiverSafeMap => {
+  return Object.keys(swordQuiverSafeMap).includes(id);
 };
 
-const isIntercardDir = (dir: DirectionOutput8): dir is DirectionIntercard => {
-  return (Directions.outputIntercardDir as string[]).includes(dir);
-};
 export interface Data extends RaidbossData {
   phase: Phase;
   // Phase 1
@@ -1369,7 +1391,30 @@ const triggerSet: TriggerSet<Data> = {
         },
       },
     },
-    // Sword Quiver - 4th line based on original cast id: 95F9 - front, FA - mid, FB - back
+
+    // Finale
+    {
+      id: 'R4S Sword Quiver AoE',
+      type: 'StartsUsing',
+      netRegex: { id: Object.keys(swordQuiverSafeMap), source: 'Wicked Thunder', capture: false },
+      response: Responses.bigAoe(),
+    },
+    // Use Ability lines for these triggers so they don't collide with the AoE call,
+    // and also because the cast starts ~14s before the mechanic resolves, and FFXIV
+    // players have goldfish memories.
+    {
+      id: 'R4S Sword Quiver Safe',
+      type: 'Ability',
+      netRegex: { id: Object.keys(swordQuiverSafeMap), source: 'Wicked Thunder' },
+      alertText: (_data, matches, output) => {
+        const id = matches.id;
+        if (!isSwordQuiverId(id))
+          throw new UnreachableCode();
+
+        return output[swordQuiverSafeMap[id]]!();
+      },
+      outputStrings: swordQuiverOutputStrings,
+    },
   ],
 };
 
