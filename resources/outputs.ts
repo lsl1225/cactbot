@@ -243,9 +243,9 @@ export default {
     en: 'Stack With Partner',
     de: 'Mit Partner stacken',
     fr: 'Packez-vous avec votre partenaire',
-    ja: '白と黒で重なる',
-    cn: '黑白配',
-    ko: '흑백 파트너랑 모이기',
+    ja: 'ペア',
+    cn: '与搭档集合',
+    ko: '파트너랑 모이기',
   },
   stackMiddle: {
     en: 'Stack in middle',

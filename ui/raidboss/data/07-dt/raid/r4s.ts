@@ -13,7 +13,7 @@ import { RaidbossData } from '../../../../../types/data';
 import { TriggerSet } from '../../../../../types/trigger';
 
 /* TO DO LIST
-   - Electrope Edge 2 - call safe tile for non-sparking players?
+   - Electrope Edge 2 - call safe tile for non-Spark players?
    - Raining Swords/Chain Lightning - track order based on player's chosen side
    - Sword Quiver
 */
@@ -239,7 +239,7 @@ const triggerSet: TriggerSet<Data> = {
       id: 'R4S Wrath of Zeus',
       type: 'StartsUsing',
       netRegex: { id: '95EF', source: 'Wicked Thunder', capture: false },
-      response: Responses.aoe(),
+      response: Responses.bigAoe(),
     },
     {
       id: 'R4S Wicked Bolt',
