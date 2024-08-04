@@ -14,7 +14,10 @@ import { TriggerSet } from '../../../../../types/trigger';
 
 /* TO DO LIST
    - Electrope Edge 2 - call safe tile for non-sparking players?
-   - Nearly all of P2 lol
+   - Midnight Sabbath - call intercard/cardinal safe spots + sequence
+   - Raining Swords/Chain Lightning - track order based on player's chosen side
+   - Sunrise Sabbath - call tower soak cardinals, cannon intercards, and cannon bait cardinals
+   - Sword Quiver
 */
 
 type NearFar = 'near' | 'far'; // wherever you are...
@@ -25,6 +28,7 @@ type LeftRight = 'left' | 'right';
 type ActorPositions = { [id: string]: DirectionOutput8 };
 type AetherialId = keyof typeof aetherialAbility;
 type AetherialEffect = 'iceRight' | 'iceLeft' | 'fireRight' | 'fireLeft';
+type IonClusterDebuff = 'yellowShort' | 'yellowLong' | 'blueShort' | 'blueLong';
 
 const aetherialAbility = {
   '9602': 'iceRight',
@@ -127,6 +131,7 @@ export interface Data extends RaidbossData {
   replicaCleaveCount: number;
   secondTwilightCleaveSafe?: DirectionOutputIntercard;
   midnightFirstMech?: PartnersSpread;
+  ionClusterDebuff?: IonClusterDebuff;
 }
 
 const triggerSet: TriggerSet<Data> = {
@@ -620,12 +625,12 @@ const triggerSet: TriggerSet<Data> = {
       response: Responses.goRight(),
     },
     {
-      id: 'R4S Positron/Negatron Debuff',
+      id: 'R4S Electron Stream Debuff',
       type: 'GainsEffect',
       // FA0 - Positron (Yellow), blue safe
       // FA1 - Negatron (Blue), yellow safe
       netRegex: { effectId: ['FA0', 'FA1'] },
-      condition: Conditions.targetIsYou(),
+      condition: (data, matches) => data.me === matches.target && data.phase === 1,
       run: (data, matches) =>
         data.electronStreamSafe = matches.effectId === 'FA0' ? 'blue' : 'yellow',
     },
@@ -856,8 +861,11 @@ const triggerSet: TriggerSet<Data> = {
       infoText: (data, matches, output) => {
         if (!isAetherialId(matches.id))
           throw new UnreachableCode();
+        // First time - no stored call (since it happens next), just save the effect
+        const firstTime = data.aetherialEffect === undefined;
         data.aetherialEffect = aetherialAbility[matches.id];
-        return output.stored!({ effect: output[data.aetherialEffect]!() });
+        if (!firstTime)
+          return output.stored!({ effect: output[data.aetherialEffect]!() });
       },
       outputStrings: {
         ...tailThrustOutputStrings,
@@ -998,7 +1006,118 @@ const triggerSet: TriggerSet<Data> = {
         },
       },
     },
-    // Sword Burst - # 95F9 - front, FA - mid, FB - back
+
+    // Chain Lightning
+    {
+      id: 'R4S Flame Slash',
+      type: 'StartsUsing',
+      netRegex: { id: '9614', source: 'Wicked Thunder', capture: false },
+      response: Responses.goSides(),
+    },
+    {
+      id: 'R4S Raining Swords',
+      type: 'Ability',
+      // use the ability line of the preceding Flame Slash cast, as the cast time
+      // for Raining Swords is very short.
+      netRegex: { id: '9614', source: 'Wicked Thunder', capture: false },
+      alertText: (_data, _matches, output) => output.towers!(),
+      outputStrings: {
+        towers: {
+          en: 'Tower Positions',
+        },
+      },
+    },
+
+    // Sunrise Sabbath
+    {
+      id: 'R4S Ion Cluster Debuff Initial',
+      type: 'GainsEffect',
+      // FA0 - Positron (Yellow) (blue cannon)
+      // FA1 - Negatron (Blue) (yellow cannon)
+      // Long = 38s, Short = 23s
+      netRegex: { effectId: ['FA0', 'FA1'] },
+      condition: (data, matches) => {
+        return data.me === matches.target &&
+          data.phase === 2 &&
+          data.ionClusterDebuff === undefined; // debuffs can get swapped/reapplied if you oopsie, so no spam
+        },
+      infoText: (data, matches, output) => {
+        data.ionClusterDebuff = matches.id === 'FA0'
+          ? (parseFloat(matches.duration) > 30 ? 'yellowLong' : 'yellowShort')
+          : (parseFloat(matches.duration) > 30 ? 'blueLong' : 'blueShort');
+        return output[data.ionClusterDebuff]!();
+      },
+      outputStrings: {
+        yellowLong: {
+          en: 'Yellow Long',
+        },
+        blueLong: {
+          en: 'Blue Long',
+        },
+        yellowShort: {
+          en: 'Yellow Short',
+        },
+        blueShort: {
+          en: 'Blue Short',
+        },
+      },
+    },
+    {
+      id: 'R4S Sunrise Sabbath First Towers + Cannons',
+      type: 'GainsEffect',
+      netRegex: { effectId: ['FA0', 'FA1'] },
+      condition: (data) => data.phase === 2,
+      delaySeconds: 11,
+      suppressSeconds: 99999, // see note above about oopsie debuff reapplication
+      alertText: (data, _matches, output) => {
+        if (data.ionClusterDebuff === undefined)
+          return;
+        return output[data.ionClusterDebuff]!();
+      },
+      outputStrings: {
+        yellowLong: {
+          en: 'Soak Tower',
+        },
+        blueLong: {
+          en: 'Soak Tower',
+        },
+        yellowShort: {
+          en: 'Bait Blue Cannon',
+        },
+        blueShort: {
+          en: 'Bait Yellow Cannon',
+        },
+      },
+    },
+    {
+      id: 'R4S Sunrise Sabbath Second Towers + Cannons',
+      type: 'GainsEffect',
+      netRegex: { effectId: ['FA0', 'FA1'] },
+      condition: (data) => data.phase === 2,
+      delaySeconds: 27,
+      suppressSeconds: 99999, // see note above about oopsie debuff reapplication
+      alertText: (data, _matches, output) => {
+        if (data.ionClusterDebuff === undefined)
+          return;
+        return output[data.ionClusterDebuff]!();
+      },
+      outputStrings: {
+        yellowLong: {
+          en: 'Bait Blue Cannon',
+        },
+        blueLong: {
+          en: 'Bait Yellow Cannon',
+        },
+        yellowShort: {
+          en: 'Soak Tower',
+        },
+        blueShort: {
+          en: 'Soak Tower',
+        },
+      },
+    },
+
+    // Sword Quiver - 4th line based on original cast id: 95F9 - front, FA - mid, FB - back
   ],
 };
 
