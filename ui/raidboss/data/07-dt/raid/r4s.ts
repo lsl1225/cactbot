@@ -1,6 +1,7 @@
 import Conditions from '../../../../../resources/conditions';
 import { UnreachableCode } from '../../../../../resources/not_reached';
 import Outputs from '../../../../../resources/outputs';
+import { callOverlayHandler } from '../../../../../resources/overlay_plugin_api';
 import { Responses } from '../../../../../resources/responses';
 import {
   DirectionOutput8,
@@ -14,8 +15,6 @@ import { TriggerSet } from '../../../../../types/trigger';
 
 /* TO DO LIST
    - Electrope Edge 2 - call safe tile for non-Spark players?
-   - Raining Swords/Chain Lightning - track order based on player's chosen side
-   - Sword Quiver
 */
 type Phase = 'door' | 'crosstail' | 'twilight' | 'midnight' | 'sunrise';
 
@@ -145,6 +144,8 @@ const tailThrustOutputStrings = {
   unknown: Outputs.unknown,
 } as const;
 
+const startingSwordList = [[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3]];
+
 const swordQuiverSafeMap = {
   '95F9': 'sidesAndBack', // front cleave
   '95FA': 'frontAndBack', // middle cleave
@@ -200,6 +201,13 @@ export interface Data extends RaidbossData {
   sunriseClones: string[];
   sunriseTowerSpots?: SunriseCardinalPair;
   seenFirstSunrise: boolean;
+  rainingSwords: {
+    mySide?: LeftRight;
+    tetherCount: number;
+    firstActorId: number;
+    left: number[][];
+    right: number[][];
+  };
 }
 
 const triggerSet: TriggerSet<Data> = {
@@ -226,6 +234,12 @@ const triggerSet: TriggerSet<Data> = {
       sunriseCannons: [],
       sunriseClones: [],
       seenFirstSunrise: false,
+      rainingSwords: {
+        tetherCount: 0,
+        firstActorId: 0,
+        left: [...startingSwordList],
+        right: [...startingSwordList],
+      },
     };
   },
   timelineTriggers: [
@@ -1206,7 +1220,7 @@ const triggerSet: TriggerSet<Data> = {
       response: Responses.goSides(),
     },
     {
-      id: 'R4S Raining Swords',
+      id: 'R4S Raining Swords Tower',
       type: 'Ability',
       // use the ability line of the preceding Flame Slash cast, as the cast time
       // for Raining Swords is very short.
@@ -1218,7 +1232,124 @@ const triggerSet: TriggerSet<Data> = {
         },
       },
     },
+    {
+      id: 'R4S Raining Swords Collector',
+      type: 'StartsUsing',
+      netRegex: { id: '9616', source: 'Wicked Thunder', capture: false },
+      promise: async (data) => {
+        const actors = (await callOverlayHandler({
+          call: 'getCombatants',
+        })).combatants;
 
+        const swordActorIds = actors
+          .filter((actor) => actor.BNpcID === 17327)
+          .sort((left, right) => left.ID! - right.ID!)
+          .map((actor) => actor.ID!);
+
+        if (swordActorIds.length !== 8) {
+          console.error(
+            `R4S Raining Swords Collector: Missing swords, count ${swordActorIds.length}`,
+          );
+        }
+
+        data.rainingSwords.firstActorId = swordActorIds[0] ?? 0;
+      },
+    },
+    {
+      id: 'R4S Raining Swords My Side Detector',
+      type: 'Ability',
+      // No source for this as the names aren't always correct for some reason
+      netRegex: { id: '9617', capture: true },
+      condition: Conditions.targetIsYou(),
+      run: (data, matches) =>
+        data.rainingSwords.mySide = parseFloat(matches.x) < 100 ? 'left' : 'right',
+    },
+    {
+      id: 'R4S Raining Swords Collect + Initial',
+      type: 'Tether',
+      netRegex: { id: ['0117', '0118'], capture: true },
+      durationSeconds: 8,
+      alertText: (data, matches, output) => {
+        // 24 tethers total, in sets of 3, 8 sets total. Sets 1 and 2 correspond to first safe spots, etc.
+        const swordId = matches.sourceId;
+        let swordIndex = parseInt(swordId, 16) - data.rainingSwords.firstActorId;
+        const swordSet = swordIndex > 3 ? data.rainingSwords.right : data.rainingSwords.left;
+        // Swords are actually ordered south to north, invert them so it makes more sense
+        swordIndex = 3 - (swordIndex % 4);
+        const tetherSet = Math.floor(data.rainingSwords.tetherCount / 6);
+        data.rainingSwords.tetherCount++;
+        swordSet[tetherSet] = swordSet[tetherSet]?.filter((spot) => spot !== swordIndex) ?? [];
+
+        if (data.rainingSwords.tetherCount === 6) {
+          const leftSafe = data.rainingSwords.left[0]?.[0] ?? 0;
+          const rightSafe = data.rainingSwords.right[0]?.[0] ?? 0;
+
+          const mySide = data.rainingSwords.mySide;
+
+          // Here (and below) if side couldn't be detected because player was dead
+          // we could print out both sides instead of an unknown output?
+          // And yes, it's possible to miss a tower in week one gear and survive.
+          if (mySide === undefined)
+            return output.unknown!();
+
+          return output.safe!({
+            side: output[mySide]!(),
+            first: mySide === 'left' ? leftSafe + 1 : rightSafe + 1,
+          });
+        }
+      },
+      outputStrings: {
+        left: Outputs.left,
+        right: Outputs.right,
+        safe: {
+          en: '${side}: Start at ${first}',
+        },
+        unknown: Outputs.unknown,
+      },
+    },
+    {
+      id: 'R4S Raining Swords Safe List',
+      type: 'Tether',
+      netRegex: { id: ['0117', '0118'], capture: false },
+      condition: (data) => data.rainingSwords.tetherCount >= 18,
+      durationSeconds: 24,
+      suppressSeconds: 10,
+      infoText: (data, _matches, output) => {
+        const mySide = data.rainingSwords.mySide;
+        if (mySide === undefined)
+          return output.unknown!();
+
+        const calloutSideSet = data.rainingSwords[mySide];
+
+        const safeSpots = [
+          calloutSideSet[0]?.[0] ?? 0,
+          calloutSideSet[1]?.[0] ?? 0,
+          calloutSideSet[2]?.[0] ?? 0,
+        ];
+
+        // Trim our last possible spot based on existing three safe spots
+        safeSpots.push([0, 1, 2, 3].filter((spot) => !safeSpots.includes(spot))[0] ?? 0);
+
+        return output.safe!({
+          side: output[mySide]!(),
+          order: safeSpots.map((i) => i + 1).join(output.separator!()),
+        });
+      },
+      outputStrings: {
+        left: Outputs.left,
+        right: Outputs.right,
+        separator: {
+          en: ' => ',
+          de: ' => ',
+          ja: ' => ',
+          cn: ' => ',
+        },
+        safe: {
+          en: '${side} Side: ${order}',
+        },
+        unknown: Outputs.unknown,
+      },
+    },
     // Sunrise Sabbath
     {
       id: 'R4S Ion Cluster Debuff Initial',
