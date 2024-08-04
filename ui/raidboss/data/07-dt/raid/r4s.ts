@@ -60,10 +60,10 @@ const actorModelStates = {
 } as const;
 
 const aetherialAbility = {
-  '9602': 'iceRight',
+  '9602': 'fireLeft',
   '9603': 'iceLeft',
   '9604': 'fireRight',
-  '9605': 'fireLeft',
+  '9605': 'iceRight',
 } as const;
 
 const isAetherialId = (id: string): id is AetherialId => {
