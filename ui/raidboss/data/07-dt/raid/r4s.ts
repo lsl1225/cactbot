@@ -132,12 +132,15 @@ const witchHuntAlertOutputStrings = {
   out: Outputs.out,
   near: {
     en: 'Baits Close (Party Far)',
+    cn: '引导靠近 (小队远离)',
   },
   far: {
     en: 'Baits Far (Party Close)',
+    cn: '引导远离 (小队靠近)',
   },
   combo: {
     en: '${inOut} => ${bait}',
+    cn: '${inOut} => ${bait}',
   },
   unknown: Outputs.unknown,
 } as const;
@@ -145,15 +148,19 @@ const witchHuntAlertOutputStrings = {
 const tailThrustOutputStrings = {
   iceLeft: {
     en: 'Double Knockback (<== Start on Left)',
+    cn: '二连击退 (<== 从左侧开始)',
   },
   iceRight: {
     en: 'Double Knockback (Start on Right ==>)',
+    cn: '二连击退 (从右侧开始 ==>)',
   },
   fireLeft: {
     en: 'Fire - Start Front + Right ==>',
+    cn: '火 - 从右上开始 ==>',
   },
   fireRight: {
     en: '<== Fire - Start Front + Left',
+    cn: '<== 火 - 从左上开始',
   },
   unknown: Outputs.unknown,
 } as const;
@@ -161,12 +168,15 @@ const tailThrustOutputStrings = {
 const swordQuiverOutputStrings = {
   frontAndSides: {
     en: 'Go Front / Sides',
+    cn: '去 前面 / 两侧',
   },
   frontAndBack: {
     en: 'Go Front / Back',
+    cn: '去 前后中间',
   },
   sidesAndBack: {
     en: 'Go Sides / Back',
+    cn: '去 后面 / 两侧',
   },
 } as const;
 
@@ -304,6 +314,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         avoid: {
           en: 'Avoid Front + Side Cleaves',
+          cn: '躲避前方激光 + 两侧直线AoE',
         },
       },
     },
@@ -334,9 +345,11 @@ const triggerSet: TriggerSet<Data> = {
         out: Outputs.out,
         spreadAvoid: {
           en: 'Spread (Avoid Side Cleaves)',
+          cn: '分散 (躲避两侧直线AoE)',
         },
         combo: {
           en: '${inOut} + ${spread}',
+          cn: '${inOut} + ${spread}',
         },
       },
     },
@@ -376,12 +389,15 @@ const triggerSet: TriggerSet<Data> = {
         out: Outputs.out,
         near: {
           en: 'Spread (Be Closer)',
+          cn: '分散 (靠近)',
         },
         far: {
           en: 'Spread (Be Further)',
+          cn: '分散 (远离)',
         },
         combo: {
           en: '${inOut} + ${spread}',
+          cn: '${inOut} + ${spread}',
         },
       },
     },
@@ -435,9 +451,11 @@ const triggerSet: TriggerSet<Data> = {
         out: Outputs.out,
         near: {
           en: 'Close',
+          cn: '近',
         },
         far: {
           en: 'Far',
+          cn: '远',
         },
         separator: {
           en: ' => ',
@@ -447,9 +465,11 @@ const triggerSet: TriggerSet<Data> = {
         },
         baitStep: {
           en: '${inOut} (${bait})',
+          cn: '${inOut} (${bait})',
         },
         baitCombo: {
           en: 'Baits: ${allBaits}',
+          cn: '引导: ${allBaits}',
         },
         unknown: Outputs.unknown,
       },
@@ -627,6 +647,7 @@ const triggerSet: TriggerSet<Data> = {
         spread: Outputs.spread,
         combo: {
           en: '${dir} => ${mech}',
+          cn: '${dir} => ${mech}',
         },
       },
     },
@@ -651,9 +672,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         short: {
           en: 'Short Debuff',
+          cn: '短Debuff',
         },
         long: {
           en: 'Long Debuff',
+          cn: '长Debuff',
         },
       },
     },
@@ -676,6 +699,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         spread: {
           en: 'Spread (${stacks} stacks)',
+          cn: '分散 (${stacks} 层)',
         },
       },
     },
@@ -702,6 +726,7 @@ const triggerSet: TriggerSet<Data> = {
         unknown: Outputs.unknown,
         combo: {
           en: '${dir} => ${mech}',
+          cn: '${dir} => ${mech}',
         },
       },
     },
@@ -753,9 +778,11 @@ const triggerSet: TriggerSet<Data> = {
         unknown: Outputs.unknown,
         tank: {
           en: '${dir} - Be in Front',
+          cn: '${dir} - 站在最前面',
         },
         nonTank: {
           en: '${dir} - Behind Tank',
+          cn: '${dir} - 站坦克后面',
         },
       },
     },
@@ -771,16 +798,20 @@ const triggerSet: TriggerSet<Data> = {
         output.responseOutputStrings = {
           swap: {
             en: 'Swap Sides',
+            cn: '换边',
           },
           stay: {
             en: 'Stay',
+            cn: '不换',
           },
           unknown: Outputs.unknown,
           tank: {
             en: '${dir} - Be in Front',
+            cn: '${dir} - 站在最前面',
           },
           nonTank: {
             en: '${dir} - Behind Tank',
+            cn: '${dir} - 站坦克后面',
           },
         };
 
@@ -832,15 +863,19 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         remoteCurrent: {
           en: 'Far Cone on You',
+          cn: '远buff点名',
         },
         proximateCurrent: {
           en: 'Near Cone on You',
+          cn: '近buff点名',
         },
         spinningConductor: {
           en: 'Small AoE on You',
+          cn: '小钢铁点名',
         },
         roundhouseConductor: {
           en: 'Donut AoE on You',
+          cn: '月环AoE点名',
         },
         colliderConductor: {
           en: 'Get Hit by Cone',
@@ -857,6 +892,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         dodge: {
           en: 'Dodge w/Partner x7',
+          cn: '和搭档躲避 x7',
         },
       },
     },
@@ -900,9 +936,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         near: {
           en: 'In Front of Partner',
+          cn: '站在搭档前面 (挡枪)',
         },
         far: {
           en: 'Behind Partner',
+          cn: '站在搭档后面',
         },
       },
     },
@@ -990,6 +1028,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         getDebuff: {
           en: 'Get Debuff from Tank',
+          cn: '从坦克传Debuff',
         },
       },
     },
@@ -1025,6 +1064,7 @@ const triggerSet: TriggerSet<Data> = {
         ...tailThrustOutputStrings,
         stored: {
           en: 'Stored: ${effect}',
+          cn: '存储: ${effect}',
         },
       },
     },
@@ -1049,6 +1089,7 @@ const triggerSet: TriggerSet<Data> = {
         output.responseOutputStrings = {
           lb3: {
             en: 'LB3!',
+            cn: '坦克LB!',
           },
         };
 
@@ -1138,6 +1179,7 @@ const triggerSet: TriggerSet<Data> = {
         sides: Outputs.sides,
         combo: {
           en: '${dir} => ${inSides}',
+          cn: '${dir} => ${inSides}',
         },
       },
     },
@@ -1204,6 +1246,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         combo: {
           en: '${dir} => ${mech}',
+          cn: '${dir} => ${mech}',
         },
         cardinals: Outputs.cardinals,
         intercards: Outputs.intercards,
@@ -1234,6 +1277,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         combo: {
           en: '${dir} => ${mech}',
+          cn: '${dir} => ${mech}',
         },
         cardinals: Outputs.cardinals,
         intercards: Outputs.intercards,
@@ -1403,15 +1447,19 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         yellowLong: {
           en: 'Long Yellow Debuff (Towers First)',
+          cn: '黄Buff长 (先踩塔)',
         },
         blueLong: {
           en: 'Long Blue Debuff (Towers First)',
+          cn: '蓝Buff长 (先踩塔)',
         },
         yellowShort: {
           en: 'Short Yellow Debuff (Cannons First)',
+          cn: '黄Buff短 (先引导)',
         },
         blueShort: {
           en: 'Short Blue Debuff (Cannons First)',
+          cn: '蓝Buff短 (先引导)',
         },
       },
     },
@@ -1535,21 +1583,27 @@ const triggerSet: TriggerSet<Data> = {
         ...Directions.outputStringsIntercardDir,
         northSouth: {
           en: 'N/S',
+          cn: '上(北)/下(南)',
         },
         eastWest: {
           en: 'E/W',
+          cn: '左(西)/右(东)',
         },
         yellowLong: {
           en: 'Soak Tower (${bait})',
+          cn: '踩塔 (${bait})',
         },
         blueLong: {
           en: 'Soak Tower (${bait})',
+          cn: '踩塔 (${bait})',
         },
         yellowShort: {
           en: 'Blue Cannon (${loc}) - Point ${bait}',
+          cn: '蓝色大炮 (${loc}) - 打向 ${bait}',
         },
         blueShort: {
           en: 'Yellow Cannon (${loc}) - Point ${bait}',
+          cn: '黄色大炮 (${loc}) - 打向 ${bait}',
         },
       },
     },
