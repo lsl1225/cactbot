@@ -853,11 +853,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         remoteCurrent: {
           en: 'Far Cone on You',
-          cn: '远buff点名',
+          cn: '远水波点名',
         },
         proximateCurrent: {
           en: 'Near Cone on You',
-          cn: '近buff点名',
+          cn: '近水波点名',
         },
         spinningConductor: {
           en: 'Small AoE on You',
@@ -865,10 +865,11 @@ const triggerSet: TriggerSet<Data> = {
         },
         roundhouseConductor: {
           en: 'Donut AoE on You',
-          cn: '月环AoE点名',
+          cn: '月环点名',
         },
         colliderConductor: {
           en: 'Get Hit by Cone',
+          cn: '吃水波',
         },
       },
     },
