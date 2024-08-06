@@ -105,9 +105,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         nwSE: {
           en: 'Knockback (NW/SE Safe)',
+          cn: '击退 (左上(西北)/右下(东南) 安全)',
         },
         neSW: {
           en: 'Knockback (NE/SW Safe)',
+          cn: '击退 (右上(东北)/左下(西南) 安全)',
         },
       },
     },
@@ -225,6 +227,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         outSpread: {
           en: 'Out + Spread',
+          cn: '钢铁 + 分散',
         },
       },
     },
@@ -411,12 +414,15 @@ const triggerSet: TriggerSet<Data> = {
         dirW: Outputs.dirW,
         insideOut: {
           en: 'Inside => Outside',
+          cn: '内侧 => 外侧',
         },
         outsideIn: {
           en: 'Outside => Inside',
+          cn: '外侧 => 内侧',
         },
         combo: {
           en: '${dir}, ${cleaves}',
+          cn: '${dir}, ${cleaves}',
         },
         unknown: Outputs.unknown,
       },
@@ -439,6 +445,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         proximity: {
           en: 'Proximity baits at target',
+          cn: 'Proximity baits at target', // FIXME
         },
         unknown: Outputs.unknown,
       },
@@ -529,15 +536,19 @@ const triggerSet: TriggerSet<Data> = {
         dirW: Outputs.dirW,
         in: {
           en: 'In + Healer Stacks => Out',
+          cn: '月环 + 治疗分摊组 => 钢铁',
         },
         out: {
           en: 'Out + Healer Stacks => In',
+          cn: '钢铁 + 治疗分摊组 => 月环',
         },
         healerStacks: {
           en: 'Go ${dir} => ${inOut}',
+          cn: '去 ${dir} => ${inOut}',
         },
         proximity: {
           en: 'Go ${dir} => Proximity Baits + Spreads',
+          cn: '去 ${dir} => Proximity Baits + 分散', // FIXME
         },
       },
     },
