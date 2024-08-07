@@ -132,16 +132,13 @@ const witchHuntAlertOutputStrings = {
   near: {
     en: 'Baits Close (Party Far)',
     cn: '引导近 (小队远)',
-    cn: '靠近引导 (小队远离)',
   },
   far: {
     en: 'Baits Far (Party Close)',
     cn: '引导远 (小队近)',
-    cn: '远离引导 (小队靠近)',
   },
   combo: {
     en: '${inOut} => ${bait}',
-    cn: '${inOut} => ${bait}',
     cn: '${inOut} => ${bait}',
   },
   unknown: Outputs.unknown,
