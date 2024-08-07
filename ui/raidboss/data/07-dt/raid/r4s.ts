@@ -25,7 +25,10 @@ type NearFar = 'near' | 'far'; // wherever you are...
 type InOut = 'in' | 'out';
 type NorthSouth = 'north' | 'south';
 type LeftRight = 'left' | 'right';
-
+type CondenserMap = {
+  long: string[];
+  short: string[];
+};
 type AetherialId = keyof typeof aetherialAbility;
 type AetherialEffect = 'iceRight' | 'iceLeft' | 'fireRight' | 'fireLeft';
 type MidnightState = 'gun' | 'wings';
@@ -118,18 +121,27 @@ const isSwordQuiverId = (id: string): id is keyof typeof swordQuiverSafeMap => {
 // For now, call the in/out, the party safe spot, and the bait spot; users can customize.
 // If/once standard strats develop, this would be a good thing to revisit.
 const witchHuntAlertOutputStrings = {
-  in: Outputs.in,
-  out: Outputs.out,
+  in: {
+    en: 'In',
+    cn: '月环',
+  },
+  out: {
+    en: 'Out',
+    cn: '钢铁',
+  },
   near: {
     en: 'Baits Close (Party Far)',
     cn: '引导近 (小队远)',
+    cn: '靠近引导 (小队远离)',
   },
   far: {
     en: 'Baits Far (Party Close)',
     cn: '引导远 (小队近)',
+    cn: '远离引导 (小队靠近)',
   },
   combo: {
     en: '${inOut} => ${bait}',
+    cn: '${inOut} => ${bait}',
     cn: '${inOut} => ${bait}',
   },
   unknown: Outputs.unknown,
@@ -138,19 +150,19 @@ const witchHuntAlertOutputStrings = {
 const tailThrustOutputStrings = {
   iceLeft: {
     en: 'Double Knockback (<== Start on Left)',
-    cn: '二连击退 (<== 从左侧开始)',
+    cn: '两次击退 (<== 左边开始)',
   },
   iceRight: {
     en: 'Double Knockback (Start on Right ==>)',
-    cn: '二连击退 (从右侧开始 ==>)',
+    cn: '两次击退 (右边开始 ==>)',
   },
   fireLeft: {
     en: 'Fire - Start Front + Right ==>',
-    cn: '火 - 从右上开始 ==>',
+    cn: '火 - 右右右 ==>',
   },
   fireRight: {
     en: '<== Fire - Start Front + Left',
-    cn: '<== 火 - 从左上开始',
+    cn: '<== 火 - 左左左',
   },
   unknown: Outputs.unknown,
 } as const;
@@ -184,6 +196,7 @@ export interface Data extends RaidbossData {
   starEffect?: 'partners' | 'spread';
   witchgleamSelfCount: number;
   condenserTimer?: 'short' | 'long';
+  condenserMap: CondenserMap;
   electronStreamSafe?: 'yellow' | 'blue';
   electronStreamSide?: NorthSouth;
   seenConductorDebuffs: boolean;
@@ -228,6 +241,10 @@ const triggerSet: TriggerSet<Data> = {
       electromines: {},
       electrominesSafe: [],
       witchgleamSelfCount: 0,
+      condenserMap: {
+        long: [],
+        short: [],
+      },
       seenConductorDebuffs: false,
       fulminousFieldCount: 0,
       conductionPointTargets: [],
@@ -305,7 +322,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         avoid: {
           en: 'Avoid Front + Side Cleaves',
-          cn: '躲避前方激光 + 两侧直线AoE',
+          cn: '躲避前方激光 + 场边直线AoE',
         },
       },
     },
@@ -332,11 +349,17 @@ const triggerSet: TriggerSet<Data> = {
       },
       run: (data) => delete data.bewitchingBurstSafe,
       outputStrings: {
-        in: Outputs.in,
-        out: Outputs.out,
+        in: {
+          en: 'In',
+          cn: '内场',
+        },
+        out: {
+          en: 'Out',
+          cn: '外场',
+        },
         spreadAvoid: {
           en: 'Spread (Avoid Side Cleaves)',
-          cn: '分散 (躲避两侧直线AoE)',
+          cn: '分散 (注意场边直线AoE)',
         },
         combo: {
           en: '${inOut} + ${spread}',
@@ -376,15 +399,21 @@ const triggerSet: TriggerSet<Data> = {
       },
       run: (data) => data.seenBasicWitchHunt = true,
       outputStrings: {
-        in: Outputs.in,
-        out: Outputs.out,
+        in: {
+          en: 'In',
+          cn: '内场',
+        },
+        out: {
+          en: 'Out',
+          cn: '外场',
+        },
         near: {
           en: 'Spread (Be Closer)',
-          cn: '分散 (靠近)',
+          cn: '靠近分散',
         },
         far: {
           en: 'Spread (Be Further)',
-          cn: '分散 (远离)',
+          cn: '远离分散',
         },
         combo: {
           en: '${inOut} + ${spread}',
@@ -438,8 +467,14 @@ const triggerSet: TriggerSet<Data> = {
         return output.baitCombo!({ allBaits: baits.join(output.separator!()) });
       },
       outputStrings: {
-        in: Outputs.in,
-        out: Outputs.out,
+        in: {
+          en: 'In',
+          cn: '月环',
+        },
+        out: {
+          en: 'Out',
+          cn: '钢铁',
+        },
         near: {
           en: 'Close',
           cn: '近',
@@ -642,10 +677,25 @@ const triggerSet: TriggerSet<Data> = {
       },
     },
     {
+      id: 'R4S Electrical Condenser Debuff Collect',
+      type: 'GainsEffect',
+      netRegex: { effectId: 'F9F', capture: true },
+      condition: Conditions.targetIsNotYou(),
+      run: (data, matches) => {
+        data.condenserTimer = parseFloat(matches.duration) > 30 ? 'long' : 'short';
+        const shortName = data.party.member(matches.target).nick;
+        if (data.condenserTimer === 'long')
+          data.condenserMap.long.push(shortName);
+        else
+          data.condenserMap.short.push(shortName);
+      },
+    },
+    {
       id: 'R4S Electrical Condenser Debuff Initial',
       type: 'GainsEffect',
       netRegex: { effectId: 'F9F', capture: true },
       condition: Conditions.targetIsYou(),
+      delaySeconds: 0.5,
       infoText: (data, matches, output) => {
         data.condenserTimer = parseFloat(matches.duration) > 30 ? 'long' : 'short';
         // Long debuff players will pick up an extra stack later.
@@ -653,20 +703,21 @@ const triggerSet: TriggerSet<Data> = {
         if (data.condenserTimer === 'long')
           data.witchgleamSelfCount++;
 
+        // Some strats use long/short debuff assignments to do position swaps for EE2.
+        const same = data.condenserMap[data.condenserTimer].join(', ');
+
         // Note: Taking unexpected lightning damage from Four/Eight Star, Sparks, or Sidewise Spark
         // will cause the stack count to increase. We could try to try to track that, but it makes
         // the final mechanic resolvable only under certain conditions (which still cause deaths),
         // so don't bother for now.  PRs welcome? :)
-        return output[data.condenserTimer]!();
+        return output[data.condenserTimer]!({ same: same });
       },
       outputStrings: {
         short: {
-          en: 'Short Debuff',
-          cn: '短Debuff',
+          en: 'Short Debuff (w/ ${same})',
         },
         long: {
-          en: 'Long Debuff',
-          cn: '长Debuff',
+          en: 'Long Debuff (w/ ${same})',
         },
       },
     },
@@ -704,9 +755,24 @@ const triggerSet: TriggerSet<Data> = {
       delaySeconds: 0.2,
       alertText: (data, matches, output) => {
         const starEffect = data.starEffect ?? 'unknown';
+
+        // Some strats have stack/spread positions based on Witchgleam stack count,
+        // so for the long debuffs, add that info (both for positioning and as a reminder).
+        const reminder = data.condenserTimer === 'long'
+          ? output.stacks!({ stacks: data.witchgleamSelfCount })
+          : '';
+
         if (matches.id === '95EC')
-          return output.combo!({ dir: output.west!(), mech: output[starEffect]!() });
-        return output.combo!({ dir: output.east!(), mech: output[starEffect]!() });
+          return output.combo!({
+            dir: output.west!(),
+            mech: output[starEffect]!(),
+            remind: reminder,
+          });
+        return output.combo!({
+          dir: output.east!(),
+          mech: output[starEffect]!(),
+          remind: reminder,
+        });
       },
       outputStrings: {
         east: Outputs.east,
@@ -714,9 +780,11 @@ const triggerSet: TriggerSet<Data> = {
         partners: Outputs.stackPartner,
         spread: Outputs.spread,
         unknown: Outputs.unknown,
+        stacks: {
+          en: '(${stacks} stacks after)',
+        },
         combo: {
-          en: '${dir} => ${mech}',
-          cn: '${dir} => ${mech}',
+          en: '${dir} => ${mech} ${remind}',
         },
       },
     },
@@ -1011,11 +1079,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         passDebuff: {
           en: 'Pass Debuff',
-          cn: '传毒',
+          cn: '传火',
         },
         getDebuff: {
           en: 'Get Debuff',
-          cn: '拿毒',
+          cn: '拿火',
         },
       },
     },
@@ -1439,19 +1507,19 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         yellowLong: {
           en: 'Long Yellow Debuff (Towers First)',
-          cn: '黄Buff长 (先踩塔)',
+          cn: '长黄 (先踩塔)',
         },
         blueLong: {
           en: 'Long Blue Debuff (Towers First)',
-          cn: '蓝Buff长 (先踩塔)',
+          cn: '长蓝 (先踩塔)',
         },
         yellowShort: {
           en: 'Short Yellow Debuff (Cannons First)',
-          cn: '黄Buff短 (先引导)',
+          cn: '短黄 (先引导)',
         },
         blueShort: {
           en: 'Short Blue Debuff (Cannons First)',
-          cn: '蓝Buff短 (先引导)',
+          cn: '短蓝 (先引导)',
         },
       },
     },
@@ -1588,11 +1656,11 @@ const triggerSet: TriggerSet<Data> = {
         },
         yellowShort: {
           en: 'Blue Cannon (${loc}) - Point ${bait}',
-          cn: '蓝色大炮 (${loc}) - 打向 ${bait}',
+          cn: '蓝激光 (${loc}) - 打向 ${bait}',
         },
         blueShort: {
           en: 'Yellow Cannon (${loc}) - Point ${bait}',
-          cn: '黄色大炮 (${loc}) - 打向 ${bait}',
+          cn: '黄激光 (${loc}) - 打向 ${bait}',
         },
       },
     },
