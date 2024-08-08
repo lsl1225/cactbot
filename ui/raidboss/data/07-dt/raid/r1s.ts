@@ -445,7 +445,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         proximity: {
           en: 'Proximity baits at target',
-          cn: 'Proximity baits at target', // FIXME
+          cn: '目标处引导水波',
         },
         unknown: Outputs.unknown,
       },
@@ -536,11 +536,11 @@ const triggerSet: TriggerSet<Data> = {
         dirW: Outputs.dirW,
         in: {
           en: 'In + Healer Stacks => Out',
-          cn: '月环 + 治疗分摊组 => 钢铁',
+          cn: '内侧 + 治疗分摊组 => 外侧',
         },
         out: {
           en: 'Out + Healer Stacks => In',
-          cn: '钢铁 + 治疗分摊组 => 月环',
+          cn: '外侧 + 治疗分摊组 => 内侧',
         },
         healerStacks: {
           en: 'Go ${dir} => ${inOut}',
@@ -548,7 +548,7 @@ const triggerSet: TriggerSet<Data> = {
         },
         proximity: {
           en: 'Go ${dir} => Proximity Baits + Spreads',
-          cn: '去 ${dir} => Proximity Baits + 分散', // FIXME
+          cn: '去 ${dir} => 引导水波 + 分散',
         },
       },
     },
