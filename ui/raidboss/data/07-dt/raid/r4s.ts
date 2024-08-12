@@ -997,8 +997,8 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         dodge: {
           en: 'Dodge w/Partner x7',
-          cn: '和搭档躲避 x7',
           ja: '相方と避ける x7',
+          cn: '和搭档躲避 x7',
         },
       },
     },
