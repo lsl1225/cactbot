@@ -111,7 +111,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         knockback: {
           en: 'Knockback (${pos1}/${pos2} Safe)',
-          cn: '击退 (${pos1}/${pos2} 安全)',
+          cn: '击退 (${pos1}/${pos2})',
         },
         northeast: Outputs.dirNE,
         northwest: Outputs.dirNW,
