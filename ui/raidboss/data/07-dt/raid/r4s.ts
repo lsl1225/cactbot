@@ -931,13 +931,13 @@ const triggerSet: TriggerSet<Data> = {
             en: 'Swap Sides',
             de: 'Seiten wechseln',
             ja: '場所を交代',
-            cn: '换边',
+            cn: '穿',
           },
           stay: {
             en: 'Stay',
             de: 'Stehen bleiben',
             ja: 'そのまま',
-            cn: '不换',
+            cn: '停',
           },
           unknown: Outputs.unknown,
           tank: {
