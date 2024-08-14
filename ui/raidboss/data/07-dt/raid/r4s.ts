@@ -187,19 +187,19 @@ const swordQuiverOutputStrings = {
     en: 'Go Front / Sides',
     de: 'Geh nach Vorne / Seiten',
     ja: '前方 / 横側 へ',
-    cn: '去 前面/两侧',
+    cn: '去前 / 侧边',
   },
   frontAndBack: {
     en: 'Go Front / Back',
     de: 'Geh nach Vorne / Hinten',
     ja: '前方 / 後方 へ',
-    cn: '去 前/后',
+    cn: '去前 / 后边',
   },
   sidesAndBack: {
     en: 'Go Sides / Back',
     de: 'Geh Seitlich / Hinten',
     ja: '横 / 後方 へ',
-    cn: '去 后面/两侧',
+    cn: '去侧 / 后边',
   },
 } as const;
 
