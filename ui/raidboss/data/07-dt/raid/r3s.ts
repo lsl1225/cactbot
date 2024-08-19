@@ -65,9 +65,11 @@ const tagTeamOutputStrings = {
   ...Directions.outputStrings8Dir,
   safeDirs: {
     en: 'Safe: ${dirs} => ${last}',
+    cn: '安全区: ${dirs} => ${last}',
   },
   separator: {
     en: '/',
+    cn: '/',
   },
 } as const;
 
@@ -345,6 +347,7 @@ const triggerSet: TriggerSet<Data> = {
         ...Directions.outputStringsCardinalDir,
         tetheredTo: {
           en: 'Tethered to ${dir} clone',
+          cn: '连线分身: ${dir}',
         },
       },
     },
@@ -533,9 +536,11 @@ const triggerSet: TriggerSet<Data> = {
         ...Directions.outputStrings8Dir,
         comboGo: {
           en: 'Knockback ${firstDir1}/${firstDir2} => Go ${secondDir}',
+          cn: '击退 ${firstDir1}/${firstDir2} => 穿 ${secondDir}',
         },
         comboStay: {
           en: 'Knockback ${firstDir1}/${firstDir2}, Stay ${secondDir}',
+          cn: '击退 ${firstDir1}/${firstDir2}, 停 ${secondDir}',
         },
       },
     },
