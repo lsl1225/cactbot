@@ -53,6 +53,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         wave: {
           en: 'Look away from party',
+          cn: '背对小队',
         },
       },
     },
@@ -64,6 +65,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         avoid: {
           en: 'Avoid bubbles',
+          cn: '躲避泡泡',
         },
       },
     },
@@ -75,6 +77,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         avoid: {
           en: 'Avoid bubbles',
+          cn: '躲避泡泡',
         },
       },
     },
@@ -144,9 +147,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         avoidDir: {
           en: 'Safe: ${dir} (on hitbox)',
+          cn: '安全区: ${dir} (on hitbox)',
         },
         avoid: {
           en: 'Avoid shifting bubbles',
+          cn: '躲避吹动的泡泡',
         },
         ...Directions.outputStringsIntercardDir,
       },
@@ -177,9 +182,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         awayFromOrb: {
           en: 'North + Away from orb',
+          cn: '上(北) + 远离球',
         },
         nearOrb: {
           en: 'Be close to North orb',
+          cn: '靠近上(北)球',
         },
       },
     },
@@ -191,6 +198,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         tiles: {
           en: 'Avoid exploding rows/columns',
+          cn: '躲避爆炸行/列',
         },
       },
     },
@@ -212,9 +220,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         stackThree: {
           en: 'Stack (3 hits)',
+          cn: '分摊 (3次)',
         },
         stackFive: {
           en: 'Stack (5 hits)',
+          cn: '分摊 (5次)',
         },
       },
     },
@@ -242,6 +252,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         kbAoeSpread: {
           en: 'Knockback (AoE) => Spread',
+          cn: '击退(AoE) => 分散',
         },
       },
     },
@@ -254,6 +265,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         dodgeSides: {
           en: 'Avoid AoEs (sides after)',
+          cn: '躲避多个AoE (稍后 去两侧)',
         },
       },
     },
@@ -274,6 +286,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         dodgeMiddle: {
           en: 'Avoid AoEs (middle after)',
+          cn: '躲避多个AoE (稍后 去中间)',
         },
       },
     },
@@ -298,9 +311,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         east: {
           en: '<== Knockback Back Left (Right After)',
+          cn: '<== 击退 左后 (稍后 去右边)',
         },
         west: {
           en: 'Knockback Back Right (Left After) ==>',
+          cn: '<== 击退 右后 (稍后 去左边)',
         },
       },
     },
@@ -316,6 +331,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         knockback: {
           en: 'Knockback (to ${dir})',
+          cn: '击退 (去 ${dir})',
         },
         dirNE: Outputs.dirNE,
         dirNW: Outputs.dirNW,
@@ -332,6 +348,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         spreadAfter: {
           en: '(spread after)',
+          cn: '(稍后分散)',
         },
       },
     },
@@ -345,6 +362,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         stackAfter: {
           en: '(stack after)',
+          cn: '(稍后分摊)',
         },
       },
     },

@@ -120,6 +120,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         avoidFront: {
           en: '${dir} (Avoid Front)',
+          cn: '${dir} (远离正面)',
         },
         cleaveRight: Outputs.left,
         cleaveLeft: Outputs.right,
@@ -154,6 +155,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         avoidRear: {
           en: '${dir} (Avoid Rear)',
+          cn: '${dir} (远离背后)',
         },
         cleaveRight: Outputs.left,
         cleaveLeft: Outputs.right,
@@ -184,6 +186,7 @@ const triggerSet: TriggerSet<Data> = {
         cleaveLeft: Outputs.right,
         cleaveRear: {
           en: 'Avoid Rear',
+          cn: '远离背后',
         },
         next: Outputs.next,
       },
