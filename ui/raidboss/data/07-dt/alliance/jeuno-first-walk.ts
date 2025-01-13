@@ -346,7 +346,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         outerFirst: {
           en: 'Rings out to in',
-          cn: '圆环 (由外到内)',
+          cn: '步进月环 (由外到内)',
         },
       },
     },
@@ -359,7 +359,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         outerFirst: {
           en: 'Rings in to out',
-          cn: '圆环 (由内到外)',
+          cn: '步进月环 (由内到外)',
         },
       },
     },
@@ -586,11 +586,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         leftThenRightShadow: {
           en: 'Left => right of shadow',
-          cn: '阴影 左 => 右',
+          cn: '分身 左 => 右',
         },
         rightThenLeftShadow: {
           en: 'Right => left of shadow',
-          cn: '阴影 右 => 左',
+          cn: '分身 右 => 左',
         },
       },
     },
@@ -729,11 +729,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         leftAndOut: {
           en: 'Left of shadow + get out',
-          cn: '左阴影 + 远离',
+          cn: '分身 左 + 远离',
         },
         rightAndOut: {
           en: 'Right of shadow + get out',
-          cn: '右阴影 + 远离',
+          cn: '分身 右 + 远离',
         },
       },
     },
