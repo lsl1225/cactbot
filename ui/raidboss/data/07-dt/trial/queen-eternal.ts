@@ -218,11 +218,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         fallCastle: {
           en: 'In front of ground windows',
-          cn: '正对下层窗户',
+          cn: '正对下层空洞',
         },
         floatCastle: {
           en: 'In front of middle windows',
-          cn: '正对中层窗户',
+          cn: '正对上层空洞',
         },
       },
     },
@@ -262,7 +262,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         gazeLater: {
           en: 'Gaze on you soon',
-          cn: '凝视点名',
+          cn: '石化眼点名',
         },
       },
     },
@@ -284,7 +284,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         shriekYou: {
           en: 'Gaze -- look away from ${otherTarget}',
-          cn: '凝视 -- 背对 ${otherTarget}',
+          cn: '石化眼 -- 背对 ${otherTarget}',
         },
         shriekOthers: {
           en: 'Look away from ${comboTargets}',
