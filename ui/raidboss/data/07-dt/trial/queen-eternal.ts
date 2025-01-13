@@ -84,6 +84,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         repeatedAOE: {
           en: 'Continuous light AoE',
+          cn: '连续小AoE',
         },
       },
     },
@@ -134,6 +135,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         regaliaYou: {
           en: 'Laser tether on YOU',
+          cn: '激光连线点名',
         },
       },
     },
@@ -161,6 +163,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         floating: {
           en: 'Gravitation -- Levitating',
+          cn: '重力 -- 上浮',
         },
       },
     },
@@ -177,6 +180,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         falling: {
           en: 'Gravitation -- Falling',
+          cn: '重力 -- 下降',
         },
       },
     },
@@ -193,6 +197,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         floating: {
           en: 'Gravitation -- Levitating',
+          cn: '重力 -- 上浮',
         },
       },
     },
@@ -213,9 +218,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         fallCastle: {
           en: 'In front of ground windows',
+          cn: '正对下层窗户',
         },
         floatCastle: {
           en: 'In front of middle windows',
+          cn: '正对中层窗户',
         },
       },
     },
@@ -227,6 +234,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         getInDonut: {
           en: 'Get in robot circle',
+          cn: '小月环',
         },
       },
     },
@@ -254,6 +262,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         gazeLater: {
           en: 'Gaze on you soon',
+          cn: '凝视点名',
         },
       },
     },
@@ -275,9 +284,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         shriekYou: {
           en: 'Gaze -- look away from ${otherTarget}',
+          cn: '凝视 -- 背对 ${otherTarget}',
         },
         shriekOthers: {
           en: 'Look away from ${comboTargets}',
+          cn: '背对 ${comboTargets}',
         },
       },
     },
@@ -290,6 +301,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         bombLater: {
           en: 'Acceleration Bomb soon',
+          cn: '稍后 加速度炸弹',
         },
       },
     },
@@ -316,6 +328,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         flareMarker: {
           en: 'Flare on YOU',
+          cn: '核爆点名',
         },
       },
     },
@@ -341,6 +354,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         fiveAOE: {
           en: '5x AoEs',
+          cn: 'AoE (5次)',
         },
       },
     },
