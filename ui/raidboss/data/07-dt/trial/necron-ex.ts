@@ -312,7 +312,10 @@ const triggerSet: TriggerSet<Data> = {
       condition: Conditions.targetIsYou(),
       infoText: (_data, _matches, output) => output.cleanse!(),
       outputStrings: {
-        cleanse: 'Cleanse Slow',
+        cleanse: {
+          en: 'Cleanse Slow',
+          cn: '康复减速',
+        },
       },
     },
     {
