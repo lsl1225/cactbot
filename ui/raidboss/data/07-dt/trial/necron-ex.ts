@@ -107,6 +107,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         baitHand: {
           en: 'Bait Hand',
+          cn: '引导手',
         },
       },
     },
@@ -125,6 +126,7 @@ const triggerSet: TriggerSet<Data> = {
         west: Outputs.west,
         text: {
           en: '${mid} => ${side}',
+          cn: '${mid} => ${side}',
         },
       },
     },
@@ -141,9 +143,11 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         lightWest: {
           en: 'Light West => Spread',
+          cn: '光左 => 分散',
         },
         lightEast: {
           en: 'Light East => Spread',
+          cn: '光右 => 分散',
         },
       },
     },
@@ -188,6 +192,7 @@ const triggerSet: TriggerSet<Data> = {
         mid: Outputs.middle,
         stored: {
           en: 'Stored ${dir}',
+          cn: '储存 ${dir}',
         },
       },
     },
@@ -217,6 +222,7 @@ const triggerSet: TriggerSet<Data> = {
         partners: Outputs.stackPartner,
         text: {
           en: '${dir} + ${mech}',
+          cn: '${dir} + ${mech}',
         },
       },
     },
@@ -229,6 +235,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         bait: {
           en: 'Drop hand => Bait hand',
+          cn: '放手 => 引导手',
         },
       },
     },
@@ -247,6 +254,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         bait: {
           en: 'Bait puddles',
+          cn: '引导黄圈',
         },
       },
     },
@@ -260,6 +268,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         bait: {
           en: 'Bait puddles => Intercardinals',
+          cn: '引导黄圈 => 叉字',
         },
       },
     },
@@ -280,6 +289,7 @@ const triggerSet: TriggerSet<Data> = {
         spread: Outputs.spread,
         tower: {
           en: 'Tower',
+          cn: '踩塔',
         },
       },
     },
@@ -366,15 +376,19 @@ const triggerSet: TriggerSet<Data> = {
         spread: Outputs.spread,
         middle: {
           en: 'Middle Row',
+          cn: '中间行',
         },
         north: {
           en: 'North Row',
+          cn: '第一行',
         },
         south: {
           en: 'South Row',
+          cn: '第三行',
         },
         text: {
           en: '${row} + ${spread}',
+          cn: '${row} + ${spread}',
         },
       },
     },
@@ -387,6 +401,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         bait: {
           en: 'Bait Hand => Dodge',
+          cn: '引导手 => 躲开',
         },
       },
     },
@@ -485,6 +500,7 @@ const triggerSet: TriggerSet<Data> = {
         partners: Outputs.stackPartner,
         text: {
           en: '${dir1} => ${dir2} => ${dir3} => ${dir4} + ${mech}',
+          cn: '${dir1} => ${dir2} => ${dir3} => ${dir4} + ${mech}',
         },
       },
     },
@@ -568,12 +584,15 @@ const triggerSet: TriggerSet<Data> = {
         middle: Outputs.middle,
         delay: {
           en: 'Wait for hand => ${dir}',
+          cn: '等手 => ${dir}',
         },
         lean: {
           en: '${dir}, lean ${to}',
+          cn: '${dir}, 靠 ${to}',
         },
         dodge: {
           en: '${dir} => Dodge Hand',
+          cn: '${dir} => 躲手',
         },
       },
     },
@@ -585,6 +604,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         towerPos: {
           en: 'Preposition for LP towers',
+          cn: '多人塔预站位',
         },
       },
     },
@@ -612,6 +632,7 @@ const triggerSet: TriggerSet<Data> = {
       outputStrings: {
         soakNext: {
           en: 'Soak Next Tower',
+          cn: '踩下一个塔',
         },
         tankBuster: Outputs.tankBuster,
       },
