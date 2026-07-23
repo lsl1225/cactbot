@@ -496,6 +496,7 @@ export const Directions = {
   outputFrom16DirNum: outputFrom16DirNum,
   outputFrom8DirNum: outputFrom8DirNum,
   outputFromCardinalNum: outputFromCardinalNum,
+  outputFromIntercardNum: outputFromIntercardNum,
   combatantStatePosTo8Dir: (
     combatant: PluginCombatantState,
     centerX: number,
